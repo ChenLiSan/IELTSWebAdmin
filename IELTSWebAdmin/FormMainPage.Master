@@ -1,0 +1,120 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="FormMainPage.master.cs" Inherits="IELTS_Listening_Test_System.FormMainPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style3 {
+            width: 222px;
+            height: 138px;
+        }
+        .auto-style4 {
+            height: 138px;
+        }
+        .auto-style12 {
+            width: 99%;
+            height: 213px;
+        }
+        .auto-style13 {
+            height: 138px;
+            width: 361px;
+        }
+        .auto-style14 {
+            width: 880px;
+            height: 81px;
+        }
+        .auto-style15 {
+            width: 256px;
+        }
+        .auto-style16 {
+            width: 256px;
+            height: 22px;
+        }
+        .auto-style17 {
+            height: 22px;
+        }
+        .auto-style18 {
+            width: 256px;
+            height: 25px;
+        }
+        .auto-style19 {
+            height: 25px;
+        }
+        .auto-style20 {
+            width: 100%;
+        }
+    </style>
+</head>
+<body style="background-size:100%">
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolderMaster" runat="server">
+                <table class="auto-style12">
+                    <tr >
+                        <td class="auto-style3">
+                            <br />
+                            <asp:Image ID="ImageLogo" runat="server" ImageUrl="ielts_logo_red.png" Height="180px" />
+                            <br /></td>
+                        <td class="auto-style13"></td>
+                        <td class="auto-style4">
+                            <div id="menu">
+                                <link href ="styleMenuBar.css" rel="stylesheet" >
+                                <ul class="auto-style14">
+                                    <li><a>Home</a></li>
+                                    <li><a href="FormAddSection.aspx">Add Section</a>
+                                        <ul>
+                                            <li><a>Edit Section</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a>Review Result</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </asp:ContentPlaceHolder>
+        </div>
+        
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <p>
+                <table class="auto-style20">
+                    <tr>
+                        <td class="auto-style16">
+                            <asp:Label ID="lblSection" runat="server" Text="Choose Section:"></asp:Label>
+                        </td>
+                        <td class="auto-style17">
+                            <asp:DropDownList ID="ddlSection" runat="server" Height="21px" Width="68px">
+                                <asp:ListItem>A</asp:ListItem>
+                                <asp:ListItem>B</asp:ListItem>
+                                <asp:ListItem>C</asp:ListItem>
+                                <asp:ListItem>D</asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                        <td class="auto-style17"></td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style18"></td>
+                        <td class="auto-style19"></td>
+                        <td class="auto-style19"></td>
+                    </tr>
+                    <tr>
+                        <td class="auto-style15">
+                            <asp:Label ID="lblTotalQuestions" runat="server" Text="Total Questions of Whole Section:"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlTotalQuestions" runat="server">
+                            </asp:DropDownList>
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </p>
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
