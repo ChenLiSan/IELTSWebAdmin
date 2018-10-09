@@ -210,15 +210,12 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="FormAddSectio.aspx" />
-    <Content Include="FormChooseTemplate.aspx" />
-    <Content Include="FormSection.aspx" />
     <Content Include="FormSubsection.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Account\Web.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="FormMainPage.Master" />
     <Content Include="js\sb-admin-charts.js" />
     <Content Include="js\sb-admin-charts.min.js" />
     <Content Include="js\sb-admin-datatables.js" />
@@ -478,27 +475,6 @@
     </Compile>
     <Compile Include="FormAddSectio.aspx.designer.cs">
       <DependentUpon>FormAddSectio.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FormChooseTemplate.aspx.cs">
-      <DependentUpon>FormChooseTemplate.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FormChooseTemplate.aspx.designer.cs">
-      <DependentUpon>FormChooseTemplate.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FormMainPage.Master.cs">
-      <DependentUpon>FormMainPage.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FormMainPage.Master.designer.cs">
-      <DependentUpon>FormMainPage.Master</DependentUpon>
-    </Compile>
-    <Compile Include="FormSection.aspx.cs">
-      <DependentUpon>FormSection.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FormSection.aspx.designer.cs">
-      <DependentUpon>FormSection.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormSubsection.aspx.cs">
       <DependentUpon>FormSubsection.aspx</DependentUpon>
