@@ -196,6 +196,10 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="AddTextbox.js" />
+    <Content Include="App_Data\WebAdmin.mdf" />
+    <Content Include="App_Data\WebAdmin_log.ldf">
+      <DependentUpon>WebAdmin.mdf</DependentUpon>
+    </Content>
     <Content Include="blank.html" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
@@ -561,7 +565,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Image\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

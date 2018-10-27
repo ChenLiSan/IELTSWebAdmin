@@ -6,33 +6,34 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.IO;
 using System.Data.SqlClient;
-
+using System.Web.Configuration;
 using System.Configuration;
-using MySql.Data.MySqlClient;
 
 namespace IELTSWebAdmin
 {
     public partial class FormAddSectio : System.Web.UI.Page
     {
-        MySql.Data.MySqlClient.MySqlConnection conn;
-        string myConnectionString = "server=127.0.0.1;uid=root;pwd=wenda123;database=ielts";
+       
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
 
-            Console.WriteLine("Page clicked");
-            Console.WriteLine("Page clicked");
-            Console.WriteLine("Page clicked");
-            try
-            {
-                conn = new MySql.Data.MySqlClient.MySqlConnection();
-                conn.ConnectionString = myConnectionString;
-                conn.Open();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
-            {
+            //Console.WriteLine("Page clicked");
+            //Console.WriteLine("Page clicked");
+            //Console.WriteLine("Page clicked");
+            //try
+            //{
+                
+            //}
+            //catch (SqlException ex)
+            //{
 
-            }
+            //}
+
+            conn.Close();
 
         }
 
@@ -42,6 +43,10 @@ namespace IELTSWebAdmin
 
         protected void ButtonUpload_Click1(object sender, EventArgs e)
         {
+            String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+
             //check the file
             Console.Write("Button clicked");
             if (FileUpload1.HasFile && FileUpload1.PostedFile != null
@@ -59,35 +64,34 @@ namespace IELTSWebAdmin
                 //the second parameter is the zero index (of specific byte)
                 //where to start storing in the buffer,
                 //the third parameter is the number of bytes 
-                //you want to read (do u care about this?)
+              
 
                 if (bytesReaded > 0)
                 {
                     try
                     {
-                        conn = new MySql.Data.MySqlClient.MySqlConnection();
-                        conn.ConnectionString = myConnectionString;
+                        
 
-                        MySql.Data.MySqlClient.MySqlCommand cmd = new MySql.Data.MySqlClient.MySqlCommand();
+                        SqlCommand cmd = new SqlCommand();
                        
-                        cmd.CommandText = "INSERT INTO Audio (audioid, file, size) VALUES (?id, ?file, ?size);";
+                        cmd.CommandText = "INSERT INTO Audio (audioid, file, size) VALUES (@id, @file, @size);";
                         cmd.Connection = conn;
-                        MySqlParameter idNameParameter = new MySqlParameter("?id", 1);
-                        MySqlParameter audioFileParameter = new MySqlParameter("?file", buffer);
-                        MySqlParameter audioSizeParameter = new MySqlParameter("?size", bytesReaded);
+                        SqlParameter idNameParameter = new SqlParameter("@id", 1);
+                        SqlParameter audioFileParameter = new SqlParameter("@file", buffer);
+                        SqlParameter audioSizeParameter = new SqlParameter("@size", bytesReaded);
 
                         cmd.Parameters.Add(idNameParameter);
                         cmd.Parameters.Add(audioFileParameter);
                         cmd.Parameters.Add(audioSizeParameter);
+                        
 
-
-                        using (conn)
-                        {
-                            conn.Open();
+                        
+                            
                             int i = cmd.ExecuteNonQuery();
                             Label1.Text = "uploaded, " + i.ToString() + " rows affected";
-
-                        }
+                            conn.Close();
+                            
+                        
                     }
                     catch (Exception ex)
                     {
@@ -100,6 +104,7 @@ namespace IELTSWebAdmin
             {
                 Label1.Text = "Choose a valid audio file";
             }
+            conn.Close();
         }
 
 
