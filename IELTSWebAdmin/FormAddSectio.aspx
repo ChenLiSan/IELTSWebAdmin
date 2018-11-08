@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FormAddSectio.aspx.cs" Inherits="IELTSWebAdmin.FormAddSectio" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FormAddSectio.aspx.cs" Inherits="IELTSWebAdmin.FormAddSectio" Async="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .auto-style1 {
@@ -53,10 +53,10 @@
             </td>
             <td class="auto-style9">
                 <asp:DropDownList ID="DropDownList1" runat="server" Height="23px" Width="78px">
-                    <asp:ListItem>1</asp:ListItem>
-                    <asp:ListItem>2</asp:ListItem>
-                    <asp:ListItem>3</asp:ListItem>
-                    <asp:ListItem>4</asp:ListItem>
+                    <asp:ListItem>A</asp:ListItem>
+                    <asp:ListItem>B</asp:ListItem>
+                    <asp:ListItem>C</asp:ListItem>
+                    <asp:ListItem>D</asp:ListItem>
                 </asp:DropDownList>
             </td>
             <td class="auto-style10">

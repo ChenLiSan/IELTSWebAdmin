@@ -31,8 +31,7 @@
                     <br />
                 </SeparatorTemplate>
             </asp:Repeater>
-           <%-- <asp:Label ID="Label3" runat="server" Text="Correct Answer:"></asp:Label>
-            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>--%>
+       
 
         </div>
     </form>
