@@ -74,24 +74,7 @@ namespace IELTSWebAdmin
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
-            String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            SqlConnection conn1 = new SqlConnection(strConn);
-            conn1.Open();
-
-            if (FileUpload1.HasFile)
-            {
-                string fileName = FileUpload1.FileName.ToString();
-                string uploadFolderPath = "~/Image/";
-                string filePath = HttpContext.Current.Server.MapPath(uploadFolderPath);
-                FileUpload1.SaveAs(filePath + "\\" + fileName);
-                //Image1.ImageUrl = "~/Image/" + "/" + FileUpload1.FileName.ToString();
-            }
-
-            
-            //SqlCommand cmd3 = new SqlCommand("insert into Image1(image1) values('" + ImageButton1.ImageUrl + "')", conn1);
-            //cmd3.ExecuteNonQuery();
-
-            conn1.Close();
+           
         }
     }    
 

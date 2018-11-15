@@ -286,6 +286,7 @@
     <Content Include="js\sb-admin-datatables.min.js" />
     <Content Include="js\sb-admin.js" />
     <Content Include="js\sb-admin.min.js" />
+    <Content Include="ManageTemplate.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -325,9 +326,12 @@
     <Content Include="pug\navbar.pug" />
     <Content Include="pug\register.pug" />
     <Content Include="pug\tables.pug" />
+    <Content Include="TemplateAnalyticDiagram.aspx" />
     <Content Include="templateDiagram.aspx" />
+    <Content Include="TemplateMap.aspx" />
     <Content Include="TemplateMatching.aspx" />
     <Content Include="TemplateMultipleChoice.aspx" />
+    <Content Include="TemplateSentenceCompletion.aspx" />
     <Content Include="TemplateShortQuestion.aspx" />
     <Content Include="WebForm2.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -550,6 +554,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ManageTemplate.aspx.cs">
+      <DependentUpon>ManageTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageTemplate.aspx.designer.cs">
+      <DependentUpon>ManageTemplate.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -574,12 +585,26 @@
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="TemplateAnalyticDiagram.aspx.cs">
+      <DependentUpon>TemplateAnalyticDiagram.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateAnalyticDiagram.aspx.designer.cs">
+      <DependentUpon>TemplateAnalyticDiagram.aspx</DependentUpon>
+    </Compile>
     <Compile Include="templateDiagram.aspx.cs">
       <DependentUpon>templateDiagram.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="templateDiagram.aspx.designer.cs">
       <DependentUpon>templateDiagram.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateMap.aspx.cs">
+      <DependentUpon>TemplateMap.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateMap.aspx.designer.cs">
+      <DependentUpon>TemplateMap.aspx</DependentUpon>
     </Compile>
     <Compile Include="TemplateMatching.aspx.cs">
       <DependentUpon>TemplateMatching.aspx</DependentUpon>
@@ -594,6 +619,13 @@
     </Compile>
     <Compile Include="TemplateMultipleChoice.aspx.designer.cs">
       <DependentUpon>TemplateMultipleChoice.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateSentenceCompletion.aspx.cs">
+      <DependentUpon>TemplateSentenceCompletion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateSentenceCompletion.aspx.designer.cs">
+      <DependentUpon>TemplateSentenceCompletion.aspx</DependentUpon>
     </Compile>
     <Compile Include="TemplateShortQuestion.aspx.cs">
       <DependentUpon>TemplateShortQuestion.aspx</DependentUpon>

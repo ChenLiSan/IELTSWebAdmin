@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -98,12 +98,14 @@ namespace IELTSWebAdmin
                         SqlCommand cmd = new SqlCommand();
 
                         cmd.CommandText = "INSERT INTO Audio (url) OUTPUT Inserted.audioid VALUES (@url);";
+                        cmd.CommandText = "INSERT INTO Section (category) VALUES (@category);";
                         cmd.Connection = conn;
                         
                         SqlParameter audioUrlParameter = new SqlParameter("@url", url);
                         cmd.Parameters.Add(audioUrlParameter);
 
-                        cmd.CommandText = "INSERT INTO ";
+                        SqlParameter categoryParameter = new SqlParameter("@category", ddlSection.SelectedItem.Value);
+                        cmd.Parameters.Add(categoryParameter);
 
                         int i = (int)cmd.ExecuteScalar();
                         //int i = (int)IDParameter.Value;
@@ -137,8 +139,10 @@ namespace IELTSWebAdmin
             }
         }
 
+        protected void btnProceed_Click(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }
 

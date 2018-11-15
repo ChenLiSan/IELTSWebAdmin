@@ -52,11 +52,11 @@
                 <asp:Label ID="Label2" runat="server" Text="Choose Section:"></asp:Label>
             </td>
             <td class="auto-style9">
-                <asp:DropDownList ID="DropDownList1" runat="server" Height="23px" Width="78px">
-                    <asp:ListItem>A</asp:ListItem>
-                    <asp:ListItem>B</asp:ListItem>
-                    <asp:ListItem>C</asp:ListItem>
-                    <asp:ListItem>D</asp:ListItem>
+                <asp:DropDownList ID="ddlSection" runat="server" Height="23px" Width="78px">
+                    <asp:ListItem>1</asp:ListItem>
+                    <asp:ListItem>2</asp:ListItem>
+                    <asp:ListItem>3</asp:ListItem>
+                    <asp:ListItem>4</asp:ListItem>
                 </asp:DropDownList>
             </td>
             <td class="auto-style10">
@@ -78,7 +78,7 @@
             <td class="auto-style4">&nbsp;</td>
             <td class="auto-style6">&nbsp;</td>
             <td>
-                <asp:Button ID="Button1" runat="server" Text="Proceed" CausesValidation="False" />
+                <asp:Button ID="btnProceed" runat="server" OnClick="btnProceed_Click" Text="Proceed" />
             </td>
         </tr>
     </table>

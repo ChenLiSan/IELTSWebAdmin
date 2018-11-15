@@ -17,8 +17,6 @@
 <body>
     <form id="form1" runat="server" class="auto-style2">
         <asp:Label ID="Label1" runat="server" Text="Insert Diagram:"></asp:Label>
-        <br />
-        <br />
         <asp:FileUpload ID="FileUpload1" runat="server" />
         <br />
         <br />

@@ -19,6 +19,7 @@
             <asp:ListItem Text="One" Value="1" />
             <asp:ListItem Text="Two" Value="2" />
             <asp:ListItem Text="Three" Value="3" />
+            <asp:ListItem Text="Four" Value="4" />
             </asp:DropDownList>
             <br />
             <br />
@@ -31,6 +32,14 @@
                     <br />
                 </SeparatorTemplate>
             </asp:Repeater>
+       
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" />
        
 
         </div>

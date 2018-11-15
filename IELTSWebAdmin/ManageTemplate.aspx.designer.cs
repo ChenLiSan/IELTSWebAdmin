@@ -10,7 +10,7 @@
 namespace IELTSWebAdmin {
     
     
-    public partial class TemplateMatching {
+    public partial class ManageTemplate {
         
         /// <summary>
         /// form1 control.
@@ -22,39 +22,66 @@ namespace IELTSWebAdmin {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// txtQuestion control.
+        /// lblText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtQuestion;
+        protected global::System.Web.UI.WebControls.Label lblText;
         
         /// <summary>
-        /// pnlTextBoxes control.
+        /// btnMultipleChoice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlTextBoxes;
+        protected global::System.Web.UI.WebControls.Button btnMultipleChoice;
         
         /// <summary>
-        /// btnAdd control.
+        /// btnMatching control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAdd;
+        protected global::System.Web.UI.WebControls.Button btnMatching;
         
         /// <summary>
-        /// btnGet control.
+        /// btnShortAnswerQ control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGet;
+        protected global::System.Web.UI.WebControls.Button btnShortAnswerQ;
+        
+        /// <summary>
+        /// btnMap control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMap;
+        
+        /// <summary>
+        /// btnSentenceComplete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSentenceComplete;
+        
+        /// <summary>
+        /// Button6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button6;
     }
 }
