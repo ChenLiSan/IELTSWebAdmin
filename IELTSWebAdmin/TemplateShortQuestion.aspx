@@ -34,12 +34,15 @@
             </asp:Repeater>
        
 
+            <asp:Label ID="lbl3" runat="server" Text="Label"></asp:Label>
+       
+
             <br />
             <br />
             <br />
             <br />
             <br />
-            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" />
+            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CausesValidation="False" />
        
 
         </div>
