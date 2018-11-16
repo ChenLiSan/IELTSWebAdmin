@@ -11,7 +11,7 @@
         <div>
 
             <asp:Label ID="Label1" runat="server" Text="Question:"></asp:Label>
-            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtQ" runat="server"></asp:TextBox>
             <br />
             <br />
             <asp:Label ID="Label2" runat="server" Text="Number of Answer："></asp:Label>

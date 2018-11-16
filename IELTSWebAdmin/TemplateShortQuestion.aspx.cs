@@ -48,9 +48,10 @@ namespace IELTSWebAdmin
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO QUESTION(answerOptions) VALUES(@AnswerOption)"))
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO QUESTION(questionText, answerOptions) VALUES(@QuestionText, @AnswerOption)"))
                     {
                         cmd.Connection = con;
+                        cmd.Parameters.AddWithValue("@QuestionText", txtQ.Text);
                         cmd.Parameters.AddWithValue("@AnswerOption", answer[i].ToString());
                         con.Open();
                         cmd.ExecuteNonQuery();
