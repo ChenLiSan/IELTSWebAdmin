@@ -10,26 +10,24 @@ using System.Web.UI.WebControls;
 
 namespace IELTSWebAdmin
 {
-    public partial class TemplateShortQuestion : System.Web.UI.Page
+    public partial class TemplateShortAnswer : System.Web.UI.Page
     {
         static DataTable dt;
         static String[] answer;
 
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!Page.IsPostBack)
             {
                 dt = new DataTable();
-                answer = new String[10];
+                answer = new String[5];
             }
         }
 
         protected void ddlNumberOfRows_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-          
             dt.Columns.Add("TextBox");
             int count = Convert.ToInt32(ddlNumberOfRows.SelectedItem.Value);
             for (int i = 0; i < count; i++)
@@ -38,20 +36,15 @@ namespace IELTSWebAdmin
             }
             this.Repeater1.DataSource = dt;
             this.Repeater1.DataBind();
-          
-           
-
-           
 
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            //DataTable dt2 = (DataTable)Repeater1.DataSource;
-            ControlCollection gv =  this.Repeater1.Controls;
+            ControlCollection gv = this.Repeater1.Controls;
             int j = 0;
 
-        
+
             foreach (Control c in gv)
             {
                 foreach (Control childc in c.Controls)
@@ -63,26 +56,28 @@ namespace IELTSWebAdmin
                     }
                 }
             }
-         
 
-
-            
-
-
-            string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO QUESTION(questionText, answerOptions) VALUES(@QuestionText, @AnswerOption)"))
+                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                using (SqlConnection con = new SqlConnection(constr))
                 {
-                    cmd.Connection = con;
-                    cmd.Parameters.AddWithValue("@QuestionText", txtQ.Text);
-                    cmd.Parameters.AddWithValue("@AnswerOption", insertString(answer));
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO QUESTION(questionText, answerText) VALUES(@QuestionText, @AnswerText)"))
+                    {
+                        cmd.Connection = con;
+                        cmd.Parameters.AddWithValue("@QuestionText", txtQ.Text);
+                        cmd.Parameters.AddWithValue("@AnswerText", insertString(answer));
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
+            }
 
         }
 
@@ -90,7 +85,7 @@ namespace IELTSWebAdmin
         {
             string answerString = "";
 
-            for (int i = 0; i <answer.Length; i++)
+            for (int i = 0; i < answer.Length; i++)
             {
                 if (answer[i] != "")
                 {
@@ -100,8 +95,5 @@ namespace IELTSWebAdmin
 
             return answerString;
         }
-
-
-
     }
 }

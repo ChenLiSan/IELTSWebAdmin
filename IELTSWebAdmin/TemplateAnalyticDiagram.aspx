@@ -1,14 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="TemplateAnalyticDiagram.aspx.cs" Inherits="IELTSWebAdmin.TemplateAnalyticDiagram"  Async="true"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
-        .auto-style1 {
-            width: 279px;
-        }
         .auto-style2 {
-            width: 120px;
+            width: 162px;
         }
         .auto-style3 {
-            width: 120px;
+            width: 162px;
             height: 29px;
         }
         .auto-style4 {
@@ -22,7 +19,7 @@
             width: 300px;
         }
         .auto-style7 {
-            width: 120px;
+            width: 162px;
             height: 27px;
         }
         .auto-style8 {
@@ -68,20 +65,42 @@
                 <td class="auto-style9"></td>
             </tr>
             <tr>
-                <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style6">&nbsp;</td>
+                <td class="auto-style2">Insert Answer Option:</td>
+                <td class="auto-style6">
+                    <asp:DropDownList ID="ddlNumberOfRows" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlNumberOfRows_SelectedIndexChanged">
+                        <asp:ListItem Text="One" Value="1" />
+                        <asp:ListItem Text="Two" Value="2" />
+                        <asp:ListItem Text="Three" Value="3" />
+                        <asp:ListItem Text="Four" Value="4" />
+                        <asp:ListItem Text="Five" Value="5" />
+                        <asp:ListItem Text="Six" Value="6" />
+                        <asp:ListItem Text="Seven" Value="7" />
+                        <asp:ListItem Text="Eight" Value="8" />
+                        <asp:ListItem Text="Nine" Value="9" />
+                        <asp:ListItem Text="Ten" Value="10" />
+                    </asp:DropDownList>
+                </td>
+                
                 <td class="auto-style12">&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
         </table>
-        <br />
-        <br />
-        <asp:Label ID="Label2" runat="server" Text="Correct Answer:"></asp:Label>
+
         <div>
-            <asp:TextBox ID="TextBox1" runat="server" CssClass="auto-style1"></asp:TextBox>
-            <%--<asp:Button ID="Button1" runat="server" CausesValidation="False" OnClick="Button1_Click" Text="Button" />--%>
+            <asp:Repeater ID="Repeater1" runat="server">
+                <ItemTemplate>
+                    <%#Container.ItemIndex+1 %>
+                    <asp:TextBox ID="txtTextBox1" runat="server" />
+                </ItemTemplate>
+                <SeparatorTemplate>
+                    <br />
+                </SeparatorTemplate>
+            </asp:Repeater>
             <br />
-            <asp:PlaceHolder ID="PlaceHolder1" runat="server" ViewStateMode="Enabled"></asp:PlaceHolder>
+            <br />
+            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CausesValidation="False" />
+       
+
         </div>
     </form>
 </asp:Content>

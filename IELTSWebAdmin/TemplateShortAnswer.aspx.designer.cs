@@ -10,7 +10,7 @@
 namespace IELTSWebAdmin {
     
     
-    public partial class TemplateMultipleChoice {
+    public partial class TemplateShortAnswer {
         
         /// <summary>
         /// form1 control.
@@ -40,6 +40,15 @@ namespace IELTSWebAdmin {
         protected global::System.Web.UI.WebControls.TextBox txtQ;
         
         /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
         /// ddlNumberOfRows control.
         /// </summary>
         /// <remarks>
@@ -58,12 +67,21 @@ namespace IELTSWebAdmin {
         protected global::System.Web.UI.WebControls.Repeater Repeater1;
         
         /// <summary>
-        /// Button1 control.
+        /// lbl3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Label lbl3;
+        
+        /// <summary>
+        /// btnSave control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSave;
     }
 }

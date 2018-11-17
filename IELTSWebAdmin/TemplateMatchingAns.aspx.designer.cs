@@ -10,7 +10,7 @@
 namespace IELTSWebAdmin {
     
     
-    public partial class TemplateShortQuestion {
+    public partial class TemplateMatchingAns {
         
         /// <summary>
         /// form1 control.

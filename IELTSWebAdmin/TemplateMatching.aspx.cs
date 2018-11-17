@@ -11,9 +11,11 @@ namespace IELTSWebAdmin
 {
     public partial class TemplateMatching : System.Web.UI.Page
     {
+        static String[] answer;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            answer = new String[10];
         }
 
         protected void AddTextBox(object sender, EventArgs e)
@@ -48,7 +50,6 @@ namespace IELTSWebAdmin
 
         protected void GetTextBoxValues(object sender, EventArgs e)
         {
-            //string message = "";
 
             //foreach (TextBox textBox in pnlTextBoxes.Controls.OfType<TextBox>())
             //{
@@ -62,24 +63,53 @@ namespace IELTSWebAdmin
             //}
 
             //ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('" + message + "');", true);
-
+            int j = 0;
             foreach (TextBox textBox in pnlTextBoxes.Controls.OfType<TextBox>())
             {
-                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString; 
+                answer[j] = textBox.Text;
+                j++;
+            }
+
+            try
+            {
+                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO QUESTION(questionText) VALUES(@Question)"))
                     {
                         cmd.Connection = con;
-                        cmd.Parameters.AddWithValue("@Question", textBox.Text);
+                        cmd.Parameters.AddWithValue("@Question", insertString(answer));
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Updated Successfully')", true);
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Update Unsuccessful')", true);
+            }
+
 
 
         }
+
+        private String insertString(String[] answer)
+        {
+            string answerString = "";
+
+            for (int i = 0; i < answer.Length; i++)
+            {
+                if (answer[i] != "")
+                {
+                    answerString += answer[i] + ",";
+                }
+            }
+
+            return answerString;
+        }
+
+
     }
 }

@@ -329,9 +329,10 @@
     <Content Include="TemplateAnalyticDiagram.aspx" />
     <Content Include="TemplateMap.aspx" />
     <Content Include="TemplateMatching.aspx" />
+    <Content Include="TemplateMatchingAns.aspx" />
     <Content Include="TemplateMultipleChoice.aspx" />
     <Content Include="TemplateSentenceCompletion.aspx" />
-    <Content Include="TemplateShortQuestion.aspx" />
+    <Content Include="TemplateShortAnswer.aspx" />
     <Content Include="WebForm2.aspx" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -605,6 +606,13 @@
     <Compile Include="TemplateMatching.aspx.designer.cs">
       <DependentUpon>TemplateMatching.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TemplateMatchingAns.aspx.cs">
+      <DependentUpon>TemplateMatchingAns.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateMatchingAns.aspx.designer.cs">
+      <DependentUpon>TemplateMatchingAns.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TemplateMultipleChoice.aspx.cs">
       <DependentUpon>TemplateMultipleChoice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -619,12 +627,12 @@
     <Compile Include="TemplateSentenceCompletion.aspx.designer.cs">
       <DependentUpon>TemplateSentenceCompletion.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TemplateShortQuestion.aspx.cs">
-      <DependentUpon>TemplateShortQuestion.aspx</DependentUpon>
+    <Compile Include="TemplateShortAnswer.aspx.cs">
+      <DependentUpon>TemplateShortAnswer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="TemplateShortQuestion.aspx.designer.cs">
-      <DependentUpon>TemplateShortQuestion.aspx</DependentUpon>
+    <Compile Include="TemplateShortAnswer.aspx.designer.cs">
+      <DependentUpon>TemplateShortAnswer.aspx</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
