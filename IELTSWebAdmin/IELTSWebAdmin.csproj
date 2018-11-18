@@ -256,6 +256,7 @@
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="AddTextbox.js" />
+    <Content Include="answerOpt.png" />
     <Content Include="App_Data\WebAdmin.mdf" />
     <Content Include="App_Data\WebAdmin_log.ldf">
       <DependentUpon>WebAdmin.mdf</DependentUpon>
@@ -329,7 +330,9 @@
     <Content Include="TemplateAnalyticDiagram.aspx" />
     <Content Include="TemplateMap.aspx" />
     <Content Include="TemplateMatching.aspx" />
+    <Content Include="TemplateMatchingAll.aspx" />
     <Content Include="TemplateMatchingAns.aspx" />
+    <Content Include="TemplateMatchingAnsOpt.aspx" />
     <Content Include="TemplateMultipleChoice.aspx" />
     <Content Include="TemplateSentenceCompletion.aspx" />
     <Content Include="TemplateShortAnswer.aspx" />
@@ -606,12 +609,26 @@
     <Compile Include="TemplateMatching.aspx.designer.cs">
       <DependentUpon>TemplateMatching.aspx</DependentUpon>
     </Compile>
+    <Compile Include="TemplateMatchingAll.aspx.cs">
+      <DependentUpon>TemplateMatchingAll.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateMatchingAll.aspx.designer.cs">
+      <DependentUpon>TemplateMatchingAll.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TemplateMatchingAns.aspx.cs">
       <DependentUpon>TemplateMatchingAns.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TemplateMatchingAns.aspx.designer.cs">
       <DependentUpon>TemplateMatchingAns.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateMatchingAnsOpt.aspx.cs">
+      <DependentUpon>TemplateMatchingAnsOpt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemplateMatchingAnsOpt.aspx.designer.cs">
+      <DependentUpon>TemplateMatchingAnsOpt.aspx</DependentUpon>
     </Compile>
     <Compile Include="TemplateMultipleChoice.aspx.cs">
       <DependentUpon>TemplateMultipleChoice.aspx</DependentUpon>

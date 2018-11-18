@@ -11,10 +11,10 @@
             <br />
             <asp:Label ID="Label2" runat="server" Text="Number of Answer："></asp:Label>
             <asp:DropDownList ID="ddlNumberOfRows" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlNumberOfRows_SelectedIndexChanged">
-            <asp:ListItem Text="One" Value="1" />
-            <asp:ListItem Text="Two" Value="2" />
-            <asp:ListItem Text="Three" Value="3" />
-            <asp:ListItem Text="Four" Value="4" />
+                <asp:ListItem Text="One" Value="1" />
+                <asp:ListItem Text="Two" Value="2" />
+                <asp:ListItem Text="Three" Value="3" />
+                <asp:ListItem Text="Four" Value="4" />
             </asp:DropDownList>
             <br />
             <br />
@@ -29,11 +29,13 @@
             </asp:Repeater>
        
 
-            <asp:Label ID="lbl3" runat="server" Text="Label"></asp:Label>
+            <br />
+            <br />
        
 
-            <br />
-            <br />
+            <asp:Label ID="lbl3" runat="server"></asp:Label>
+       
+
             <br />
             <br />
             <br />

@@ -9,7 +9,7 @@
             <asp:TextBox ID="txtQ" runat="server"></asp:TextBox>
             <br />
             <br />
-            <asp:Label ID="Label2" runat="server" Text="Number of Answer："></asp:Label>
+            <asp:Label ID="Label2" runat="server" Text="Number of Question："></asp:Label>
             <asp:DropDownList ID="ddlNumberOfRows" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlNumberOfRows_SelectedIndexChanged">
             <asp:ListItem Text="One" Value="1" />
             <asp:ListItem Text="Two" Value="2" />
