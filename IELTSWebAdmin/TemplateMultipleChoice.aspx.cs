@@ -19,6 +19,10 @@ namespace IELTSWebAdmin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            Label2.Text = Session["TotalQ"].ToString();
+            
+
             if (!Page.IsPostBack)
             {
                 dt = new DataTable();
@@ -92,7 +96,7 @@ namespace IELTSWebAdmin
             {
                 if (answer[i] != "")
                 {
-                    answerString += answer[i] + ",";
+                    answerString += answer[i] + "|";
                 }
             }
 

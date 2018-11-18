@@ -89,7 +89,7 @@ namespace IELTSWebAdmin
             {
                 if (answer[i] != "")
                 {
-                    answerString += answer[i] + ",";
+                    answerString += answer[i] + "|";
                 }
             }
 

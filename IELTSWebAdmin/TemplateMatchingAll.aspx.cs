@@ -13,23 +13,13 @@ namespace IELTSWebAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            getAnswerOpt(ddlAnswerOpt);
-        }
-
-        protected void ddlAnswerOpt_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void getAnswerOpt(DropDownList ddl)
-        { 
 
             String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection conn = new SqlConnection(strConn);
             SqlDataReader dtrAnsOpt;
             conn.Open();
 
-            String strSelect = "Select DISTINCT answerOptions from Question";
+            String strSelect = "Select DISTINCT answerOptions from question ";
 
             SqlCommand cmdSelect = new SqlCommand(strSelect, conn);
 
@@ -42,19 +32,31 @@ namespace IELTSWebAdmin
 
                 while (dtrAnsOpt.Read())
                 {
-                    String answerOptions = dtrAnsOpt.GetString(0);
+                    String ansOpt = dtrAnsOpt.GetString(0);
 
-                    ddlAnswerOpt.Items.Add(new ListItem(answerOptions, answerOptions));
+                    ddlAnswerOpt.Items.Add(new ListItem(ansOpt, ansOpt));
 
                 }
             }
             else
             {
-                lblMessage.Text = "No Record in Staff List!";
+                lblMessage.Text = "No Record!";
             }
 
             conn.Close();
             dtrAnsOpt.Close();
+
+        }
+
+        protected void ddlAnswerOpt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void getAnswerOpt(DropDownList ddl)
+        {
+
+
         }
     }
 }

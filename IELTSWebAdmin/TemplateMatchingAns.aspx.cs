@@ -63,12 +63,14 @@ namespace IELTSWebAdmin
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
 
-                using (SqlCommand cmd = new SqlCommand("INSERT INTO SUBSECTION(sectionText) VALUES(@SectionText)"))
+                using (SqlCommand cmd = new SqlCommand("INSERT INTO SUBSECTION(sectionText) VALUES(@SectionText);SELECT MAX(subsectionID) FROM SUBSECTION"))
                 {
                     cmd.Connection = con;
                     cmd.Parameters.AddWithValue("@SectionText", txtQ.Text);
+                    
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                   // cmd.ExecuteNonQuery();
+                    int subID = Convert.ToInt32(cmd.ExecuteScalar());
                     con.Close();
                 }
 
@@ -79,7 +81,7 @@ namespace IELTSWebAdmin
                         using (SqlConnection con1 = new SqlConnection(constr))
 
                         using (SqlCommand cmd1 = new SqlCommand("INSERT INTO QUESTION(questionText) VALUES(@QuestionText);SELECT MAX(questionID) FROM QUESTION"))
-                          {
+                         {
                                 cmd1.Connection = con1;
                                 cmd1.Parameters.AddWithValue("@QuestionText", answer[i]);
                                 //int maxId = Convert.ToInt32(cmd1.ExecuteScalar());

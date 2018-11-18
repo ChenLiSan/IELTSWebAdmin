@@ -329,7 +329,6 @@
     <Content Include="pug\tables.pug" />
     <Content Include="TemplateAnalyticDiagram.aspx" />
     <Content Include="TemplateMap.aspx" />
-    <Content Include="TemplateMatching.aspx" />
     <Content Include="TemplateMatchingAll.aspx" />
     <Content Include="TemplateMatchingAns.aspx" />
     <Content Include="TemplateMatchingAnsOpt.aspx" />
@@ -601,13 +600,6 @@
     </Compile>
     <Compile Include="TemplateMap.aspx.designer.cs">
       <DependentUpon>TemplateMap.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TemplateMatching.aspx.cs">
-      <DependentUpon>TemplateMatching.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TemplateMatching.aspx.designer.cs">
-      <DependentUpon>TemplateMatching.aspx</DependentUpon>
     </Compile>
     <Compile Include="TemplateMatchingAll.aspx.cs">
       <DependentUpon>TemplateMatchingAll.aspx</DependentUpon>
