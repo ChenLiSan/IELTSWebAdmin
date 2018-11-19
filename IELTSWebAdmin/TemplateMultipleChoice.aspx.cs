@@ -19,15 +19,14 @@ namespace IELTSWebAdmin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Label2.Text = Session["TotalQ"].ToString();
             
-            Label2.Text = Session["TotalQ"].ToString();
-            
-
             if (!Page.IsPostBack)
             {
                 dt = new DataTable();
                 answer = new String[6];
             }
+
         }
 
         
@@ -42,6 +41,12 @@ namespace IELTSWebAdmin
             }
             this.Repeater1.DataSource = dt;
             this.Repeater1.DataBind();
+        }
+
+        protected void txtTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            String text = txtTextBox1.text;
+            ddlCorrectAns.Items.Add(text);
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -84,8 +89,11 @@ namespace IELTSWebAdmin
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
             }
 
-
-
+            lblQ.Visible = false;
+            txtQ.Visible = false;
+            lblAnsOpt.Visible = false;
+            ddlNumberOfRows.Visible = false;
+            Repeater1.Visible = false;
         }
 
         private String insertString(String[] answer)

@@ -13,8 +13,6 @@ namespace IELTSWebAdmin
         String address = "";
 
 
-
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (HttpContext.Current.Session["TotalQ"] != null)
@@ -24,6 +22,17 @@ namespace IELTSWebAdmin
             else
             {
                 HttpContext.Current.Session["TotalQ"] = 0;
+            }
+
+            if (HttpContext.Current.Session["TotalQ"].Equals(0))
+            {
+                Response.Redirect("FormAddSectio.aspx");
+            }
+            else
+            {
+                Response.Redirect("FormSubsection.aspx");
+                ddlQ.Visible = false;
+                Label2.Visible = false;
             }
         }
 

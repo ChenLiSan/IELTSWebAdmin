@@ -78,7 +78,7 @@
             <td class="auto-style4">&nbsp;</td>
             <td class="auto-style6">&nbsp;</td>
             <td>
-                <asp:Button ID="btnProceed" runat="server" OnClick="btnProceed_Click" Text="Proceed" />
+                <asp:Button ID="btnProceed" runat="server" OnClick="btnProceed_Click" Text="Proceed" PostBackUrl="~/FormSubsection.aspx" />
             </td>
         </tr>
     </table>

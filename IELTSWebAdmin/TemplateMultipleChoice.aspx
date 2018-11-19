@@ -5,10 +5,11 @@
 
     <form id="form1" runat="server">
 
-        <asp:Label ID="Label1" runat="server" Text="Question Text:"></asp:Label>
+        <asp:Label ID="lblQ" runat="server" Text="Question Text:"></asp:Label>
         <asp:TextBox ID="txtQ" runat="server"></asp:TextBox>
         <br />
         <br />
+        <asp:Label ID="lblAnsOpt" runat="server" Text="Answer Options: "></asp:Label>
    <asp:DropDownList ID="ddlNumberOfRows" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlNumberOfRows_SelectedIndexChanged">
             <asp:ListItem Text="One" Value="1" />
             <asp:ListItem Text="Two" Value="2" />
@@ -29,17 +30,12 @@
             </asp:Repeater>
         
        
-
-        <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
-        
-       
-
         <br />
+        <asp:Label ID="Label2" runat="server" Text="Label">Correct Answer: </asp:Label>
+
         <br />
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Save" />
-        
-       
-
+        <asp:DropDownList ID="ddlCorrectAns" runat="server"></asp:DropDownList>
     </form>
 
 </asp:Content>

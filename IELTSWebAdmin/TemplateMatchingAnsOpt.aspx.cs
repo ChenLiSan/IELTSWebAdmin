@@ -66,7 +66,7 @@ namespace IELTSWebAdmin
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO QUESTION(answerOptions) VALUES(@AnswerOptions)"))
                     {
                         cmd.Connection = con;
-                        cmd.Parameters.AddWithValue("@AnswerText", insertString(answer));
+                        cmd.Parameters.AddWithValue("@AnswerOptions", insertString(answer));
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();
@@ -89,7 +89,7 @@ namespace IELTSWebAdmin
             {
                 if (answer[i] != "")
                 {
-                    answerString += answer[i] + ",";
+                    answerString += answer[i] + "|";
                 }
             }
 

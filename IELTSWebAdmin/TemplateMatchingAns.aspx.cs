@@ -15,6 +15,7 @@ namespace IELTSWebAdmin
         static DataTable dt;
         static String[] answer;
         static int[] id;
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,6 +23,7 @@ namespace IELTSWebAdmin
             {
                 dt = new DataTable();
                 answer = new String[5];
+
             }
         }
 
@@ -80,17 +82,17 @@ namespace IELTSWebAdmin
                         string constr1 = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                         using (SqlConnection con1 = new SqlConnection(constr))
 
-                        using (SqlCommand cmd1 = new SqlCommand("INSERT INTO QUESTION(questionText) VALUES(@QuestionText);SELECT MAX(questionID) FROM QUESTION"))
-                         {
-                                cmd1.Connection = con1;
-                                cmd1.Parameters.AddWithValue("@QuestionText", answer[i]);
-                                //int maxId = Convert.ToInt32(cmd1.ExecuteScalar());
-                                int maxId = id[i];
-                                con1.Open();
-                                cmd1.ExecuteNonQuery();
-                                con1.Close();
-                                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
-                          }
+                    using (SqlCommand cmd1 = new SqlCommand("INSERT INTO QUESTION(questionText) VALUES(@QuestionText);SELECT MAX(questionID) FROM QUESTION"))
+                    {
+                        cmd1.Connection = con1;
+                        cmd1.Parameters.AddWithValue("@QuestionText", answer[i]);
+                        int maxId = Convert.ToInt32(cmd1.ExecuteScalar());
+                        maxId = id[i];
+                        con1.Open();
+                        cmd1.ExecuteNonQuery();
+                        con1.Close();
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+                    }
                         
                     }
             }
