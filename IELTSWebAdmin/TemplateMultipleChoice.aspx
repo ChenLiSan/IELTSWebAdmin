@@ -19,7 +19,7 @@
             </asp:DropDownList>
         <br />
 
-        <asp:Repeater ID="Repeater1" runat="server">
+        <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                 <ItemTemplate>
                     <%#Container.ItemIndex+1 %>
                     <asp:TextBox ID="txtTextBox1" runat="server" />
@@ -31,11 +31,22 @@
         
        
         <br />
-        <asp:Label ID="Label2" runat="server" Text="Label">Correct Answer: </asp:Label>
+        
 
         <br />
         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Save" />
-        <asp:DropDownList ID="ddlCorrectAns" runat="server"></asp:DropDownList>
+        <br />
+        <br />
+        <asp:Label ID="lblMessage" runat="server"></asp:Label>
+        <br />
+        <br />
+        <asp:Label ID="Label2" runat="server" Text="Correct Answer: " Visible="False"></asp:Label>
+        <asp:DropDownList ID="ddlCorrectAns" runat="server" Visible="False" OnSelectedIndexChanged="ddlCorrectAns_SelectedIndexChanged"></asp:DropDownList>
+        <br />
+        <br />
+        <asp:Button ID="btnSave1" runat="server" Text="Save Correct Answer" Visible="False" OnClick="btnSave1_Click" />
+        <br />
+        
     </form>
 
 </asp:Content>

@@ -28,67 +28,7 @@ namespace IELTSWebAdmin
 
         protected async void btnUpload_Click(object sender, EventArgs e)
         {
-            String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(strConn);
-            conn.Open();
-
-            //check the file
-            Console.Write("Button clicked");
-            HttpPostedFile file = FileUpload1.PostedFile;
-   
-
-
-            string filePath, fileName;
-            if (FileUpload1.PostedFile != null)
-            {
-                filePath = FileUpload1.PostedFile.FileName; // file name with path.
-                fileName = FileUpload1.FileName;// Only file name.
-                var stream = FileUpload1.PostedFile.InputStream;
-
-                // Constructr FirebaseStorage, path to where you want to upload the file and Put it there
-                var task = new FirebaseStorage("ielts-9c8f1.appspot.com")
-                     .Child("data")
-                     .Child("photo")
-                     .Child(FileUpload1.FileName)
-                     .PutAsync(stream);
-
-                // Track progress of the upload
-                task.Progress.ProgressChanged += (s, er) => Console.WriteLine($"Progress: {er.Percentage} %");
-
-                String url = "";
-                url = await task;
-
-                if (url != "")
-                {
-                    try
-                    {
-
-
-                        SqlCommand cmd = new SqlCommand();
-
-                        cmd.CommandText = "INSERT INTO IMAGE1 (url) VALUES (@url);";
-                        cmd.Connection = conn;
-
-                        SqlParameter photoUrlParameter = new SqlParameter("@url", url);
-                        cmd.Parameters.Add(photoUrlParameter);
-
-                        int i = (int)cmd.ExecuteScalar();
-                        Label3.Text = "Photo Uploaded ";
-                        conn.Close();
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Label1.Text = ex.Message.ToString();
-                    }
-                }
-
-            }
-            else
-            {
-                Label1.Text = "Choose a valid audio file";
-            }
-            conn.Close();
+           
         }
 
         protected void ddlNumberOfRows_SelectedIndexChanged(object sender, EventArgs e)
@@ -159,6 +99,32 @@ namespace IELTSWebAdmin
             }
 
             return answerString;
+        }
+
+        protected void btnSave1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                using (SqlConnection con = new SqlConnection(constr))
+
+                using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerText = @AnswerText WHERE questionID = @queID"))
+                {
+                    cmd.Connection = con;
+                    cmd.Parameters.AddWithValue("@AnswerText", ddlCorrectAns.SelectedValue);
+                    int queID = (int)Session["qID"];
+                    cmd.Parameters.AddWithValue("@queID", queID);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
+            }
         }
     }
 }

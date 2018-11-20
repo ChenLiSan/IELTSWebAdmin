@@ -23,19 +23,6 @@ namespace IELTSWebAdmin
             String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
-
-            //Console.WriteLine("Page clicked");
-            //Console.WriteLine("Page clicked");
-            //Console.WriteLine("Page clicked");
-            //try
-            //{
-
-            //}
-            //catch (SqlException ex)
-            //{
-
-            //}
-
             conn.Close();
 
         }
@@ -93,21 +80,26 @@ namespace IELTSWebAdmin
                 {
                     try
                     {
-
-
                         SqlCommand cmd = new SqlCommand();
-
-                        cmd.CommandText = "INSERT INTO Audio (url) OUTPUT Inserted.audioid VALUES (@url);";
-                        cmd.CommandText = "INSERT INTO Section (category) VALUES (@category);";
+                        cmd.CommandText = "INSERT INTO Section (audio) VALUES (@url);SELECT MAX(sectionID) FROM Section";
                         cmd.Connection = conn;
-                        
                         SqlParameter audioUrlParameter = new SqlParameter("@url", url);
                         cmd.Parameters.Add(audioUrlParameter);
+                        int secIDs = Convert.ToInt32(cmd.ExecuteScalar());
+                        Session["sID"] = secIDs;
+                        conn.Close();
 
-                        SqlParameter categoryParameter = new SqlParameter("@category", ddlSection.SelectedItem.Value);
-                        cmd.Parameters.Add(categoryParameter);
+                        conn.Open();
+                        SqlCommand cmd1 = new SqlCommand();
+                        cmd1.CommandText = "UPDATE Section SET category = @category WHERE sectionID = @secID";
+                        cmd1.Connection = conn;
+                        int c = int.Parse(ddlSection.SelectedItem.Text);
+                        SqlParameter categoryParameter = new SqlParameter("@category", c);
+                        cmd1.Parameters.Add(categoryParameter);
+                        int secID = (int)Session["sID"];
+                        cmd1.Parameters.AddWithValue("@secID", secID);
 
-                        int i = (int)cmd.ExecuteScalar();
+                        int i = (int)cmd1.ExecuteScalar();
                         //int i = (int)IDParameter.Value;
                         Label1.Text = "video Uploaded ";
                         conn.Close();
@@ -140,6 +132,11 @@ namespace IELTSWebAdmin
         }
 
         protected void btnProceed_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlSection_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

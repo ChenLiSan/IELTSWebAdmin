@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FormSubsection.aspx.cs" Inherits="IELTSWebAdmin.FormSubsection" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="FormSubsection.aspx.cs" Inherits="IELTSWebAdmin.FormSubsection"  Async="true"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .auto-style1 {
@@ -23,7 +23,7 @@
                 <asp:Label ID="Label1" runat="server" Text="Choose Template:"></asp:Label>
             </td>
             <td class="auto-style1">
-                <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" style="width: 91px">
+                <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" style="width: 91px" AutoPostBack="True">
                     <asp:ListItem>Matching</asp:ListItem>
                     <asp:ListItem>Multiple Choice</asp:ListItem>
                     <asp:ListItem>Form, Note, Table</asp:ListItem>
@@ -33,6 +33,17 @@
                 </asp:DropDownList>
             </td>
             <td class="auto-style1"></td>
+        </tr>
+        <tr>
+            <td class="auto-style2">
+        <asp:Label ID="Label3" runat="server" Text="Insert Diagram:" Visible="False"></asp:Label>
+            </td>
+            <td class="auto-style1">
+        <asp:FileUpload ID="FileUpload1" runat="server" Visible="False" />
+        <asp:Button ID="btnUpload" runat="server" OnClick="btnUpload_ClickAsync" Text="Upload" Visible="False" />
+                <asp:Label ID="Label4" runat="server" Visible="False"></asp:Label>
+            </td>
+            <td class="auto-style1">&nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style2">
@@ -47,6 +58,13 @@
                     <asp:ListItem>5</asp:ListItem>
                 </asp:DropDownList>
             </td>
+            <td class="auto-style1"></td>
+        </tr>
+        <tr>
+            <td class="auto-style2">
+                </td>
+            <td class="auto-style1">
+                </td>
             <td class="auto-style1"></td>
         </tr>
         <tr>

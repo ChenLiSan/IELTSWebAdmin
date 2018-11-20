@@ -16,6 +16,7 @@ namespace IELTSWebAdmin
 
         static DataTable dt;
         static String[] answer;
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,7 +26,11 @@ namespace IELTSWebAdmin
             {
                 dt = new DataTable();
                 answer = new String[6];
+                
             }
+
+            
+
 
         }
 
@@ -43,11 +48,6 @@ namespace IELTSWebAdmin
             this.Repeater1.DataBind();
         }
 
-        protected void txtTextBox1_TextChanged(object sender, EventArgs e)
-        {
-            String text = txtTextBox1.text;
-            ddlCorrectAns.Items.Add(text);
-        }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -72,14 +72,17 @@ namespace IELTSWebAdmin
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO QUESTION(questionText, answerOptions) VALUES(@QuestionText, @AnswerOption)"))
+                    using (SqlCommand cmd = new SqlCommand("INSERT INTO QUESTION(questionText, answerOptions) VALUES(@QuestionText, @AnswerOption);SELECT MAX(questionID) FROM QUESTION"))
+                    
                     {
                         cmd.Connection = con;
                         cmd.Parameters.AddWithValue("@QuestionText", txtQ.Text);
                         cmd.Parameters.AddWithValue("@AnswerOption", insertString(answer));
                         con.Open();
-                        cmd.ExecuteNonQuery();
+                        //cmd.ExecuteNonQuery();
+                        int queIDs = Convert.ToInt32(cmd.ExecuteScalar());
                         con.Close();
+                        Session["qID"] = queIDs;
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
                     }
                 }
@@ -94,6 +97,48 @@ namespace IELTSWebAdmin
             lblAnsOpt.Visible = false;
             ddlNumberOfRows.Visible = false;
             Repeater1.Visible = false;
+            Button1.Visible = false;
+
+            Label2.Visible = true;
+            ddlCorrectAns.Visible = true;
+            btnSave1.Visible = true;
+
+            String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            SqlConnection conn = new SqlConnection(strConn);
+            SqlDataReader dtrAnsOpt;
+            conn.Open();
+
+            String strSelect = "Select answerOptions from Question WHERE questionID = @queID";
+
+            int queID = (int)Session["qID"];
+            SqlCommand cmdSelect = new SqlCommand(strSelect, conn);
+            cmdSelect.Parameters.AddWithValue("@queID", queID);
+            dtrAnsOpt = cmdSelect.ExecuteReader();
+
+
+            if (dtrAnsOpt.HasRows)
+            {
+
+                while (dtrAnsOpt.Read())
+                {
+                    String AnsOpt = dtrAnsOpt.GetString(0);
+
+                    string[] word = AnsOpt.Split('|');
+                    foreach (string w in word)
+                    {
+                        ddlCorrectAns.Items.Add(new ListItem(w, w));
+                    }
+
+                }
+            }
+            else
+            {
+                lblMessage.Text = "No Record Found!";
+            }
+
+            conn.Close();
+            dtrAnsOpt.Close();
+
         }
 
         private String insertString(String[] answer)
@@ -109,6 +154,43 @@ namespace IELTSWebAdmin
             }
 
             return answerString;
+        }
+
+        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+
+        }
+
+        protected void ddlCorrectAns_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnSave1_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+
+            using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerText = @AnswerText WHERE questionID = @queID"))
+            {
+                cmd.Connection = con;
+                cmd.Parameters.AddWithValue("@AnswerText", ddlCorrectAns.SelectedValue);
+                int queID = (int)Session["qID"];
+                cmd.Parameters.AddWithValue("@queID", queID);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
+            }
         }
     }
 }
