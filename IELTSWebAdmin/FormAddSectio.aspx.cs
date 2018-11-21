@@ -25,6 +25,13 @@ namespace IELTSWebAdmin
             conn.Open();
             conn.Close();
 
+            if (!IsPostBack)
+            {
+                Session["currentQ"] = 1;
+
+            }
+
+
         }
 
         byte[] buffer;
@@ -99,8 +106,7 @@ namespace IELTSWebAdmin
                         int secID = (int)Session["sID"];
                         cmd1.Parameters.AddWithValue("@secID", secID);
 
-                        int i = (int)cmd1.ExecuteScalar();
-                        //int i = (int)IDParameter.Value;
+                        int i = (int)cmd1.ExecuteNonQuery();
                         Label1.Text = "video Uploaded ";
                         conn.Close();
 
@@ -133,7 +139,7 @@ namespace IELTSWebAdmin
 
         protected void btnProceed_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("FormSubsection.aspx");
         }
 
         protected void ddlSection_SelectedIndexChanged(object sender, EventArgs e)

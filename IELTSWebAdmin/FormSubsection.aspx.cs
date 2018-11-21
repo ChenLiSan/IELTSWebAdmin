@@ -13,7 +13,7 @@ namespace IELTSWebAdmin
     public partial class FormSubsection : System.Web.UI.Page
     {
         int totalQ ;
-        String address = "";
+        static String address = "";
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -25,6 +25,7 @@ namespace IELTSWebAdmin
             else
             {
                 HttpContext.Current.Session["TotalQ"] = 0;
+                Session["imageurl"] = "";
             }
 
             //if (HttpContext.Current.Session["TotalQ"].Equals(0))
@@ -40,10 +41,12 @@ namespace IELTSWebAdmin
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            Session["typeofsection"] = DropDownList1.SelectedValue;
+            Session["address"] = "TemplateMatchingAns.aspx";
+
             if (DropDownList1.SelectedValue.Equals("Matching"))
             {
-                address = "TemplateMatchingAns.aspx";
+                Session["address"] = "TemplateMatchingAns.aspx";
                 Label3.Visible = false;
                 FileUpload1.Visible = false;
                 btnUpload.Visible = false;
@@ -51,7 +54,7 @@ namespace IELTSWebAdmin
             }
             else if (DropDownList1.SelectedValue.Equals("Multiple Choice"))
             {
-                address = "TemplateMultipleChoice.aspx";
+                Session["address"] = "TemplateMultipleChoice.aspx";
                 Label3.Visible = false;
                 FileUpload1.Visible = false;
                 btnUpload.Visible = false;
@@ -59,7 +62,7 @@ namespace IELTSWebAdmin
             }
             else if (DropDownList1.SelectedValue.Equals("Form, Note, Table"))
             {
-                address = "TemplateAnalyticDiagram.aspx";
+                Session["address"] = "TemplateAnalyticDiagram.aspx";
                 Label3.Visible = true;
                 FileUpload1.Visible = true;
                 btnUpload.Visible = true;
@@ -67,7 +70,7 @@ namespace IELTSWebAdmin
             }
             else if (DropDownList1.SelectedValue.Equals("Sentences Completion"))
             {
-                address = "TemplateSentenceCompletion.aspx";
+                Session["address"] = "TemplateSentenceCompletion.aspx";
                 Label3.Visible = false;
                 FileUpload1.Visible = false;
                 btnUpload.Visible = false;
@@ -75,7 +78,7 @@ namespace IELTSWebAdmin
             }
             else if (DropDownList1.SelectedValue.Equals("Short Answer"))
             {
-                address = "TemplateShortAnswer.aspx";
+                Session["address"] = "TemplateShortAnswer.aspx";
                 Label3.Visible = false;
                 FileUpload1.Visible = false;
                 btnUpload.Visible = false;
@@ -83,7 +86,7 @@ namespace IELTSWebAdmin
             }
             else if (DropDownList1.SelectedValue.Equals("Plan, Map, Diagram labeling"))
             {
-                address = "TemplateMap.aspx";
+                Session["address"] = "TemplateMap.aspx";
                 Label3.Visible = true;
                 FileUpload1.Visible = true;
                 btnUpload.Visible = true;
@@ -99,20 +102,45 @@ namespace IELTSWebAdmin
 
         protected void btnProceed_Click(object sender, EventArgs e)
         {
+            String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            SqlConnection conn = new SqlConnection(strConn);
+            conn.Open();
+            try
+            {
+                String url = (String)Session["imageurl"];
+                String type = (String)Session["typeofsection"];
+
+                SqlCommand cmd = new SqlCommand();
+
+                cmd.CommandText = "INSERT INTO SUBSECTION (totalQuestions, typeOfQuestion,imageurl, section, sectionText) VALUES (@t, @toQ, @url, @section, @sectionText);";
+                cmd.Connection = conn;
+
+                SqlParameter photoUrlParameter = new SqlParameter("@url", url);
+                cmd.Parameters.Add(photoUrlParameter);
+                cmd.Parameters.Add(new SqlParameter("@t", totalQ));
+                cmd.Parameters.Add(new SqlParameter("@toq", type));
+                string id= (string)Session["sID"];
+                cmd.Parameters.Add(new SqlParameter("@section", id));
+                cmd.Parameters.Add(new SqlParameter("@sectionText", txtSecText.Text));
+
+                int i = (int)cmd.ExecuteScalar();
+                conn.Close();
+
+            }
+            catch (Exception ex)
+            {
+                Label4.Text = ex.Message.ToString();
+            }
+            address = (string)Session["address"];
+
             Response.Redirect(address);
         }
 
         protected async void btnUpload_ClickAsync(object sender, EventArgs e)
         {
-            String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(strConn);
-            conn.Open();
-
             //check the file
             Console.Write("Button clicked");
             HttpPostedFile file = FileUpload1.PostedFile;
-
-
 
             string filePath, fileName;
             if (FileUpload1.PostedFile != null)
@@ -133,43 +161,21 @@ namespace IELTSWebAdmin
 
                 String url = "";
                 url = await task;
+                Session["imageurl"] = url;
 
                 if (url != "")
                 {
-                    try
-                    {
-
-
-                        SqlCommand cmd = new SqlCommand();
-
-                        cmd.CommandText = "INSERT INTO IMAGE1 (url) VALUES (@url);";
-                        cmd.Connection = conn;
-
-                        SqlParameter photoUrlParameter = new SqlParameter("@url", url);
-                        cmd.Parameters.Add(photoUrlParameter);
-
-                        int i = (int)cmd.ExecuteScalar();
-                        Label3.Text = "Photo Uploaded ";
-                        conn.Close();
-
-                    }
-                    catch (Exception ex)
-                    {
-                        Label4.Text = ex.Message.ToString();
-                    }
+                    
+                    Label3.Text = "Photo Uploaded ";
                 }
 
             }
             else
             {
-                Label4.Text = "Choose a valid audio file";
+                Label4.Text = "Choose a valid image file";
             }
-            conn.Close();
-        }
-
-        protected async void btnUpload_Click(object sender, EventArgs e)
-        {
             
         }
+
     }
 }

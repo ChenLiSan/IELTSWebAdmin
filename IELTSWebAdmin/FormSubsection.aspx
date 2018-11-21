@@ -14,6 +14,15 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="LandingPage.aspx">Dashboard</a>
+        </li>
+         <li class="breadcrumb-item">
+          <a href="FormAddSectio.aspx">Add Question</a>
+        </li>
+        <li class="breadcrumb-item active">Add Subsection</li>
+      </ol>
 
     <form id="form1" runat="server">
 
@@ -23,7 +32,7 @@
                 <asp:Label ID="Label1" runat="server" Text="Choose Template:"></asp:Label>
             </td>
             <td class="auto-style1">
-                <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" style="width: 91px" AutoPostBack="True">
+                <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True" Width="177px">
                     <asp:ListItem>Matching</asp:ListItem>
                     <asp:ListItem>Multiple Choice</asp:ListItem>
                     <asp:ListItem>Form, Note, Table</asp:ListItem>
@@ -47,23 +56,30 @@
         </tr>
         <tr>
             <td class="auto-style2">
-                <asp:Label ID="Label2" runat="server" Text="No. of Subsection:"></asp:Label>
+                <asp:Label ID="Label5" runat="server" Text="Section Text: "></asp:Label>
             </td>
             <td class="auto-style1">
-                <asp:DropDownList ID="ddlQ" runat="server" OnSelectedIndexChanged="ddlQ_SelectedIndexChanged">
-                    <asp:ListItem>1</asp:ListItem>
-                    <asp:ListItem>2</asp:ListItem>
-                    <asp:ListItem>3</asp:ListItem>
-                    <asp:ListItem>4</asp:ListItem>
-                    <asp:ListItem>5</asp:ListItem>
-                </asp:DropDownList>
+                <asp:TextBox ID="txtSecText" runat="server" Width="418px"></asp:TextBox>
             </td>
             <td class="auto-style1"></td>
         </tr>
         <tr>
             <td class="auto-style2">
+                <asp:Label ID="Label2" runat="server" Text="No. of Question: "></asp:Label>
                 </td>
             <td class="auto-style1">
+                <asp:DropDownList ID="ddlQ" runat="server" OnSelectedIndexChanged="ddlQ_SelectedIndexChanged" Width="62px">
+                    <asp:ListItem>1</asp:ListItem>
+                    <asp:ListItem>2</asp:ListItem>
+                    <asp:ListItem>3</asp:ListItem>
+                    <asp:ListItem>4</asp:ListItem>
+                    <asp:ListItem>5</asp:ListItem>
+                    <asp:ListItem>6</asp:ListItem>
+                    <asp:ListItem>7</asp:ListItem>
+                    <asp:ListItem>8</asp:ListItem>
+                    <asp:ListItem>9</asp:ListItem>
+                    <asp:ListItem>10</asp:ListItem>
+                </asp:DropDownList>
                 </td>
             <td class="auto-style1"></td>
         </tr>
