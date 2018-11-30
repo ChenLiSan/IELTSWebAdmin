@@ -79,6 +79,17 @@ namespace IELTSWebAdmin
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
             }
 
+            int tq = (int)Session["TotalQ"];
+
+            if (tq > 1)
+            {
+                Session["TotalQ"] = tq - 1;
+                Response.Redirect("TemplateMultipleChoice.aspx");
+            }
+            else
+            {
+                Response.Redirect("FormSubsection.aspx");
+            }
         }
 
         private String insertString(String[] answer)

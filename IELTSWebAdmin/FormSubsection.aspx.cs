@@ -28,15 +28,7 @@ namespace IELTSWebAdmin
                 Session["imageurl"] = "";
             }
 
-            //if (HttpContext.Current.Session["TotalQ"].Equals(0))
-            //{
-            //    Response.Redirect("FormAddSectio.aspx");
-            //}
-            //else
-            //{
-            //    Response.Redirect("FormSubsection.aspx");
-               
-            //}
+
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -51,6 +43,8 @@ namespace IELTSWebAdmin
                 FileUpload1.Visible = false;
                 btnUpload.Visible = false;
                 Label4.Visible = false;
+                Label2.Visible = false;
+                ddlQ.Visible = false;
             }
             else if (DropDownList1.SelectedValue.Equals("Multiple Choice"))
             {
@@ -59,6 +53,8 @@ namespace IELTSWebAdmin
                 FileUpload1.Visible = false;
                 btnUpload.Visible = false;
                 Label4.Visible = false;
+                Label2.Visible = true;
+                ddlQ.Visible = true;
             }
             else if (DropDownList1.SelectedValue.Equals("Form, Note, Table"))
             {
@@ -67,6 +63,8 @@ namespace IELTSWebAdmin
                 FileUpload1.Visible = true;
                 btnUpload.Visible = true;
                 Label4.Visible = true;
+                Label2.Visible = true;
+                ddlQ.Visible = true;
             }
             else if (DropDownList1.SelectedValue.Equals("Sentences Completion"))
             {
@@ -75,6 +73,9 @@ namespace IELTSWebAdmin
                 FileUpload1.Visible = false;
                 btnUpload.Visible = false;
                 Label4.Visible = false;
+                Label2.Visible = true;
+                ddlQ.Visible = true;
+
             }
             else if (DropDownList1.SelectedValue.Equals("Short Answer"))
             {
@@ -83,15 +84,18 @@ namespace IELTSWebAdmin
                 FileUpload1.Visible = false;
                 btnUpload.Visible = false;
                 Label4.Visible = false;
+                Label2.Visible = true; ;
+                ddlQ.Visible = true;
             }
             else if (DropDownList1.SelectedValue.Equals("Plan, Map, Diagram labeling"))
             {
-                Session["address"] = "TemplateMap.aspx";
+                Session["address"] = "TemplateAnalyticDiagram.aspx";
                 Label3.Visible = true;
                 FileUpload1.Visible = true;
                 btnUpload.Visible = true;
                 Label4.Visible = true;
-
+                Label2.Visible = true;
+                ddlQ.Visible = true;
             }
         }
 
@@ -134,6 +138,8 @@ namespace IELTSWebAdmin
             address = (string)Session["address"];
 
             Response.Redirect(address);
+
+            totalQ = (int)Session["TotalQ"];
         }
 
         protected async void btnUpload_ClickAsync(object sender, EventArgs e)
@@ -176,6 +182,7 @@ namespace IELTSWebAdmin
             }
             
         }
+
 
     }
 }

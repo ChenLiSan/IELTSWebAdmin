@@ -21,16 +21,13 @@ namespace IELTSWebAdmin
         protected void Page_Load(object sender, EventArgs e)
         {
             //Label2.Text = Session["TotalQ"].ToString();
-            
+
             if (!Page.IsPostBack)
             {
                 dt = new DataTable();
                 answer = new String[6];
-                
+
             }
-
-            
-
 
         }
 
@@ -156,10 +153,6 @@ namespace IELTSWebAdmin
             return answerString;
         }
 
-        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
-        {
-
-        }
 
         protected void ddlCorrectAns_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -172,7 +165,7 @@ namespace IELTSWebAdmin
             try
             {
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
+                using (SqlConnection con = new SqlConnection(constr))
 
             using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerText = @AnswerText WHERE questionID = @queID"))
             {
@@ -190,6 +183,18 @@ namespace IELTSWebAdmin
             catch (Exception ex)
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
+            }
+
+            int tq = (int)Session["TotalQ"];
+
+            if (tq > 1)
+            {
+                Session["TotalQ"] = tq - 1;
+                Response.Redirect("TemplateMultipleChoice.aspx");
+            }
+            else
+            {
+                Response.Redirect("FormSubsection.aspx");
             }
         }
     }

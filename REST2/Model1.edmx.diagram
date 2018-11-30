@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0b727feb83984808931b035c58f56919" Name="Diagram1">
+        <EntityTypeShape EntityType="WebAdminModel.attempt" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAdminModel.candidate" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAdminModel.paper" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAdminModel.question" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAdminModel.role" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAdminModel.section" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAdminModel.session" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAdminModel.staff" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAdminModel.subsection" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebAdminModel.Table" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="WebAdminModel.FK_candidate_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAdminModel.FK_Table_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAdminModel.FK_paper_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAdminModel.FK_paper_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAdminModel.FK_paper_ToTable_2" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAdminModel.FK_paper_ToTable_3" ManuallyRouted="false" />
+        <AssociationConnector Association="WebAdminModel.FK_staff_ToTable" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WebAdminModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="attempt">
+          <Key>
+            <PropertyRef Name="attemptID" />
+          </Key>
+          <Property Name="attemptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="candidate" Type="int" />
+          <Property Name="paper" Type="int" />
+          <Property Name="sessionID" Type="int" />
+          <Property Name="record" Type="nvarchar(max)" />
+          <Property Name="log" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="candidate">
+          <Key>
+            <PropertyRef Name="candidateID" />
+          </Key>
+          <Property Name="candidateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" />
+          <Property Name="studentID" Type="varchar" MaxLength="100" />
+          <Property Name="gmailID" Type="varchar" MaxLength="200" />
+          <Property Name="attemptID" Type="int" />
+          <Property Name="eligibility" Type="varchar" MaxLength="100" />
+          <Property Name="token" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="paper">
+          <Key>
+            <PropertyRef Name="paperID" />
+          </Key>
+          <Property Name="paperID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sectionA" Type="int" />
+          <Property Name="sectionB" Type="int" />
+          <Property Name="sectionC" Type="int" />
+          <Property Name="sectionD" Type="int" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="questionID" />
+          </Key>
+          <Property Name="questionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="questionText" Type="varchar" MaxLength="2000" />
+          <Property Name="answerText" Type="varchar" MaxLength="2000" />
+          <Property Name="sequence" Type="int" />
+          <Property Name="answerOptions" Type="varchar" MaxLength="2000" />
+          <Property Name="subsection" Type="int" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleName" Type="varchar" MaxLength="50" />
+          <Property Name="reports" Type="tinyint" />
+          <Property Name="marking" Type="tinyint" />
+          <Property Name="question" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="section">
+          <Key>
+            <PropertyRef Name="sectionID" />
+          </Key>
+          <Property Name="sectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category" Type="int" />
+          <Property Name="audio" Type="nvarchar(max)" />
+          <Property Name="setter" Type="int" />
+        </EntityType>
+        <EntityType Name="session">
+          <Key>
+            <PropertyRef Name="sessionID" />
+          </Key>
+          <Property Name="sessionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="startTime" Type="time" Precision="7" />
+          <Property Name="date" Type="date" />
+          <Property Name="validPeriod" Type="time" Precision="7" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="staffID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffName" Type="varchar" MaxLength="200" />
+          <Property Name="gmailID" Type="varchar" MaxLength="200" />
+          <Property Name="role" Type="int" />
+          <Property Name="token" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="subsection">
+          <Key>
+            <PropertyRef Name="subsectionID" />
+          </Key>
+          <Property Name="subsectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="totalQuestions" Type="int" />
+          <Property Name="typeOfQuestion" Type="varchar" MaxLength="100" />
+          <Property Name="image" Type="image" />
+          <Property Name="section" Type="int" />
+          <Property Name="sectionText" Type="varchar(max)" />
+          <Property Name="imageurl" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_candidate_ToTable">
+          <End Role="attempt" Type="Self.attempt" Multiplicity="0..1" />
+          <End Role="candidate" Type="Self.candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attempt">
+              <PropertyRef Name="attemptID" />
+            </Principal>
+            <Dependent Role="candidate">
+              <PropertyRef Name="attemptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paper_ToTable">
+          <End Role="section" Type="Self.section" Multiplicity="0..1" />
+          <End Role="paper" Type="Self.paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="section">
+              <PropertyRef Name="sectionID" />
+            </Principal>
+            <Dependent Role="paper">
+              <PropertyRef Name="sectionA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paper_ToTable_1">
+          <End Role="section" Type="Self.section" Multiplicity="0..1" />
+          <End Role="paper" Type="Self.paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="section">
+              <PropertyRef Name="sectionID" />
+            </Principal>
+            <Dependent Role="paper">
+              <PropertyRef Name="sectionB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paper_ToTable_2">
+          <End Role="section" Type="Self.section" Multiplicity="0..1" />
+          <End Role="paper" Type="Self.paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="section">
+              <PropertyRef Name="sectionID" />
+            </Principal>
+            <Dependent Role="paper">
+              <PropertyRef Name="sectionC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paper_ToTable_3">
+          <End Role="section" Type="Self.section" Multiplicity="0..1" />
+          <End Role="paper" Type="Self.paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="section">
+              <PropertyRef Name="sectionID" />
+            </Principal>
+            <Dependent Role="paper">
+              <PropertyRef Name="sectionD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staff_ToTable">
+          <End Role="roles" Type="Self.roles" Multiplicity="0..1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable">
+          <End Role="session" Type="Self.session" Multiplicity="0..1" />
+          <End Role="attempt" Type="Self.attempt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="session">
+              <PropertyRef Name="sessionID" />
+            </Principal>
+            <Dependent Role="attempt">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebAdminModelStoreContainer">
+          <EntitySet Name="attempt" EntityType="Self.attempt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="candidate" EntityType="Self.candidate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="paper" EntityType="Self.paper" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="question" EntityType="Self.question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="section" EntityType="Self.section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="session" EntityType="Self.session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subsection" EntityType="Self.subsection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_candidate_ToTable" Association="Self.FK_candidate_ToTable">
+            <End Role="attempt" EntitySet="attempt" />
+            <End Role="candidate" EntitySet="candidate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paper_ToTable" Association="Self.FK_paper_ToTable">
+            <End Role="section" EntitySet="section" />
+            <End Role="paper" EntitySet="paper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paper_ToTable_1" Association="Self.FK_paper_ToTable_1">
+            <End Role="section" EntitySet="section" />
+            <End Role="paper" EntitySet="paper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paper_ToTable_2" Association="Self.FK_paper_ToTable_2">
+            <End Role="section" EntitySet="section" />
+            <End Role="paper" EntitySet="paper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paper_ToTable_3" Association="Self.FK_paper_ToTable_3">
+            <End Role="section" EntitySet="section" />
+            <End Role="paper" EntitySet="paper" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staff_ToTable" Association="Self.FK_staff_ToTable">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable" Association="Self.FK_Table_ToTable">
+            <End Role="session" EntitySet="session" />
+            <End Role="attempt" EntitySet="attempt" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebAdminModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="attempt">
+          <Key>
+            <PropertyRef Name="attemptID" />
+          </Key>
+          <Property Name="attemptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="candidate" Type="Int32" />
+          <Property Name="paper" Type="Int32" />
+          <Property Name="sessionID" Type="Int32" />
+          <Property Name="record" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="log" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="candidates" Relationship="Self.FK_candidate_ToTable" FromRole="attempt" ToRole="candidate" />
+          <NavigationProperty Name="session" Relationship="Self.FK_Table_ToTable" FromRole="attempt" ToRole="session" />
+        </EntityType>
+        <EntityType Name="candidate">
+          <Key>
+            <PropertyRef Name="candidateID" />
+          </Key>
+          <Property Name="candidateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="studentID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="gmailID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="attemptID" Type="Int32" />
+          <Property Name="eligibility" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="attempt" Relationship="Self.FK_candidate_ToTable" FromRole="candidate" ToRole="attempt" />
+        </EntityType>
+        <EntityType Name="paper">
+          <Key>
+            <PropertyRef Name="paperID" />
+          </Key>
+          <Property Name="paperID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sectionA" Type="Int32" />
+          <Property Name="sectionB" Type="Int32" />
+          <Property Name="sectionC" Type="Int32" />
+          <Property Name="sectionD" Type="Int32" />
+          <NavigationProperty Name="section" Relationship="Self.FK_paper_ToTable" FromRole="paper" ToRole="section" />
+          <NavigationProperty Name="section1" Relationship="Self.FK_paper_ToTable_1" FromRole="paper" ToRole="section" />
+          <NavigationProperty Name="section2" Relationship="Self.FK_paper_ToTable_2" FromRole="paper" ToRole="section" />
+          <NavigationProperty Name="section3" Relationship="Self.FK_paper_ToTable_3" FromRole="paper" ToRole="section" />
+        </EntityType>
+        <EntityType Name="question">
+          <Key>
+            <PropertyRef Name="questionID" />
+          </Key>
+          <Property Name="questionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="questionText" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="answerText" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="sequence" Type="Int32" />
+          <Property Name="answerOptions" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="subsection" Type="Int32" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reports" Type="Byte" />
+          <Property Name="marking" Type="Byte" />
+          <Property Name="question" Type="Byte" />
+          <NavigationProperty Name="staffs" Relationship="Self.FK_staff_ToTable" FromRole="roles" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="section">
+          <Key>
+            <PropertyRef Name="sectionID" />
+          </Key>
+          <Property Name="sectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category" Type="Int32" />
+          <Property Name="audio" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="setter" Type="Int32" />
+          <NavigationProperty Name="papers" Relationship="Self.FK_paper_ToTable" FromRole="section" ToRole="paper" />
+          <NavigationProperty Name="papers1" Relationship="Self.FK_paper_ToTable_1" FromRole="section" ToRole="paper" />
+          <NavigationProperty Name="papers2" Relationship="Self.FK_paper_ToTable_2" FromRole="section" ToRole="paper" />
+          <NavigationProperty Name="papers3" Relationship="Self.FK_paper_ToTable_3" FromRole="section" ToRole="paper" />
+        </EntityType>
+        <EntityType Name="session">
+          <Key>
+            <PropertyRef Name="sessionID" />
+          </Key>
+          <Property Name="sessionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="startTime" Type="Time" Precision="7" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <Property Name="validPeriod" Type="Time" Precision="7" />
+          <NavigationProperty Name="attempts" Relationship="Self.FK_Table_ToTable" FromRole="session" ToRole="attempt" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="staffID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="gmailID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="Int32" />
+          <Property Name="token" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="role1" Relationship="Self.FK_staff_ToTable" FromRole="staff" ToRole="roles" />
+        </EntityType>
+        <EntityType Name="subsection">
+          <Key>
+            <PropertyRef Name="subsectionID" />
+          </Key>
+          <Property Name="subsectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="totalQuestions" Type="Int32" />
+          <Property Name="typeOfQuestion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="section" Type="Int32" />
+          <Property Name="sectionText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="imageurl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_candidate_ToTable">
+          <End Role="attempt" Type="Self.attempt" Multiplicity="0..1" />
+          <End Role="candidate" Type="Self.candidate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="attempt">
+              <PropertyRef Name="attemptID" />
+            </Principal>
+            <Dependent Role="candidate">
+              <PropertyRef Name="attemptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable">
+          <End Role="session" Type="Self.session" Multiplicity="0..1" />
+          <End Role="attempt" Type="Self.attempt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="session">
+              <PropertyRef Name="sessionID" />
+            </Principal>
+            <Dependent Role="attempt">
+              <PropertyRef Name="sessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paper_ToTable">
+          <End Role="section" Type="Self.section" Multiplicity="0..1" />
+          <End Role="paper" Type="Self.paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="section">
+              <PropertyRef Name="sectionID" />
+            </Principal>
+            <Dependent Role="paper">
+              <PropertyRef Name="sectionA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paper_ToTable_1">
+          <End Role="section" Type="Self.section" Multiplicity="0..1" />
+          <End Role="paper" Type="Self.paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="section">
+              <PropertyRef Name="sectionID" />
+            </Principal>
+            <Dependent Role="paper">
+              <PropertyRef Name="sectionB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paper_ToTable_2">
+          <End Role="section" Type="Self.section" Multiplicity="0..1" />
+          <End Role="paper" Type="Self.paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="section">
+              <PropertyRef Name="sectionID" />
+            </Principal>
+            <Dependent Role="paper">
+              <PropertyRef Name="sectionC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paper_ToTable_3">
+          <End Role="section" Type="Self.section" Multiplicity="0..1" />
+          <End Role="paper" Type="Self.paper" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="section">
+              <PropertyRef Name="sectionID" />
+            </Principal>
+            <Dependent Role="paper">
+              <PropertyRef Name="sectionD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staff_ToTable">
+          <End Role="roles" Type="Self.role" Multiplicity="0..1" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="staff">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebAdminEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="attempts" EntityType="Self.attempt" />
+          <EntitySet Name="candidates" EntityType="Self.candidate" />
+          <EntitySet Name="papers" EntityType="Self.paper" />
+          <EntitySet Name="questions" EntityType="Self.question" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="sections" EntityType="Self.section" />
+          <EntitySet Name="sessions" EntityType="Self.session" />
+          <EntitySet Name="staffs" EntityType="Self.staff" />
+          <EntitySet Name="subsections" EntityType="Self.subsection" />
+          <EntitySet Name="Tables" EntityType="Self.Table" />
+          <AssociationSet Name="FK_candidate_ToTable" Association="Self.FK_candidate_ToTable">
+            <End Role="attempt" EntitySet="attempts" />
+            <End Role="candidate" EntitySet="candidates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable" Association="Self.FK_Table_ToTable">
+            <End Role="session" EntitySet="sessions" />
+            <End Role="attempt" EntitySet="attempts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paper_ToTable" Association="Self.FK_paper_ToTable">
+            <End Role="section" EntitySet="sections" />
+            <End Role="paper" EntitySet="papers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paper_ToTable_1" Association="Self.FK_paper_ToTable_1">
+            <End Role="section" EntitySet="sections" />
+            <End Role="paper" EntitySet="papers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paper_ToTable_2" Association="Self.FK_paper_ToTable_2">
+            <End Role="section" EntitySet="sections" />
+            <End Role="paper" EntitySet="papers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paper_ToTable_3" Association="Self.FK_paper_ToTable_3">
+            <End Role="section" EntitySet="sections" />
+            <End Role="paper" EntitySet="papers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staff_ToTable" Association="Self.FK_staff_ToTable">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="staff" EntitySet="staffs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebAdminModelStoreContainer" CdmEntityContainer="WebAdminEntities">
+          <EntitySetMapping Name="attempts">
+            <EntityTypeMapping TypeName="WebAdminModel.attempt">
+              <MappingFragment StoreEntitySet="attempt">
+                <ScalarProperty Name="attemptID" ColumnName="attemptID" />
+                <ScalarProperty Name="candidate" ColumnName="candidate" />
+                <ScalarProperty Name="paper" ColumnName="paper" />
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="record" ColumnName="record" />
+                <ScalarProperty Name="log" ColumnName="log" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="candidates">
+            <EntityTypeMapping TypeName="WebAdminModel.candidate">
+              <MappingFragment StoreEntitySet="candidate">
+                <ScalarProperty Name="candidateID" ColumnName="candidateID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="studentID" ColumnName="studentID" />
+                <ScalarProperty Name="gmailID" ColumnName="gmailID" />
+                <ScalarProperty Name="attemptID" ColumnName="attemptID" />
+                <ScalarProperty Name="eligibility" ColumnName="eligibility" />
+                <ScalarProperty Name="token" ColumnName="token" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="papers">
+            <EntityTypeMapping TypeName="WebAdminModel.paper">
+              <MappingFragment StoreEntitySet="paper">
+                <ScalarProperty Name="paperID" ColumnName="paperID" />
+                <ScalarProperty Name="sectionA" ColumnName="sectionA" />
+                <ScalarProperty Name="sectionB" ColumnName="sectionB" />
+                <ScalarProperty Name="sectionC" ColumnName="sectionC" />
+                <ScalarProperty Name="sectionD" ColumnName="sectionD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="questions">
+            <EntityTypeMapping TypeName="WebAdminModel.question">
+              <MappingFragment StoreEntitySet="question">
+                <ScalarProperty Name="questionID" ColumnName="questionID" />
+                <ScalarProperty Name="questionText" ColumnName="questionText" />
+                <ScalarProperty Name="answerText" ColumnName="answerText" />
+                <ScalarProperty Name="sequence" ColumnName="sequence" />
+                <ScalarProperty Name="answerOptions" ColumnName="answerOptions" />
+                <ScalarProperty Name="subsection" ColumnName="subsection" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="WebAdminModel.role">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+                <ScalarProperty Name="reports" ColumnName="reports" />
+                <ScalarProperty Name="marking" ColumnName="marking" />
+                <ScalarProperty Name="question" ColumnName="question" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sections">
+            <EntityTypeMapping TypeName="WebAdminModel.section">
+              <MappingFragment StoreEntitySet="section">
+                <ScalarProperty Name="sectionID" ColumnName="sectionID" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="audio" ColumnName="audio" />
+                <ScalarProperty Name="setter" ColumnName="setter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sessions">
+            <EntityTypeMapping TypeName="WebAdminModel.session">
+              <MappingFragment StoreEntitySet="session">
+                <ScalarProperty Name="sessionID" ColumnName="sessionID" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="validPeriod" ColumnName="validPeriod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staffs">
+            <EntityTypeMapping TypeName="WebAdminModel.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="staffID" ColumnName="staffID" />
+                <ScalarProperty Name="staffName" ColumnName="staffName" />
+                <ScalarProperty Name="gmailID" ColumnName="gmailID" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="token" ColumnName="token" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subsections">
+            <EntityTypeMapping TypeName="WebAdminModel.subsection">
+              <MappingFragment StoreEntitySet="subsection">
+                <ScalarProperty Name="subsectionID" ColumnName="subsectionID" />
+                <ScalarProperty Name="totalQuestions" ColumnName="totalQuestions" />
+                <ScalarProperty Name="typeOfQuestion" ColumnName="typeOfQuestion" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="section" ColumnName="section" />
+                <ScalarProperty Name="sectionText" ColumnName="sectionText" />
+                <ScalarProperty Name="imageurl" ColumnName="imageurl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tables">
+            <EntityTypeMapping TypeName="WebAdminModel.Table">
+              <MappingFragment StoreEntitySet="Table">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

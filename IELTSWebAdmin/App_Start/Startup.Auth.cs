@@ -59,11 +59,11 @@ namespace IELTSWebAdmin
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "586381160221-506cple9p8vjld2th1q9v574fqu0va14.apps.googleusercontent.com",
+                ClientSecret = "MXnzWCcMh4ISLQ5NKUTxohEC"
+            });
         }
     }
 }

@@ -5,11 +5,13 @@
      <form id="form1" runat="server">
         <div>
 
+            Main
+
             <asp:Label ID="Label1" runat="server" Text="Question:"></asp:Label>
             <asp:TextBox ID="txtQ" runat="server"></asp:TextBox>
             <br />
             <br />
-            <asp:Label ID="Label2" runat="server" Text="Number of Question："></asp:Label>
+            <asp:Label ID="Label2" runat="server" Text="Number of Question Text："></asp:Label>
             <asp:DropDownList ID="ddlNumberOfRows" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlNumberOfRows_SelectedIndexChanged">
             <asp:ListItem Text="One" Value="1" />
             <asp:ListItem Text="Two" Value="2" />

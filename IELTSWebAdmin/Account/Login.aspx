@@ -6,8 +6,8 @@
     <h2><%: Title %>.</h2>
 
     <div class="row">
-        <div class="col-md-8">
-            <section id="loginForm">
+        <%-- <div class="col-md-8">
+           <section id="loginForm">
                 <div class="form-horizontal">
                     <h4>Use a local account to log in.</h4>
                     <hr />
@@ -17,7 +17,7 @@
                         </p>
                     </asp:PlaceHolder>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-2 control-label">Email</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-2 control-label" style="left: 0px; top: 0px">Email</asp:Label>
                         <div class="col-md-10">
                             <asp:TextBox runat="server" ID="Email" CssClass="form-control" TextMode="Email" />
                             <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
@@ -51,12 +51,12 @@
                 <p>
                     <%-- Enable this once you have account confirmation enabled for password reset functionality
                     <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" ViewStateMode="Disabled">Forgot your password?</asp:HyperLink>
-                    --%>
+                    
                 </p>
             </section>
-        </div>
+        </div>--%>
 
-        <div class="col-md-4">
+        <div <%--class="col-md-4"--%>>
             <section id="socialLoginForm">
                 <uc:OpenAuthProviders runat="server" ID="OpenAuthLogin" />
             </section>

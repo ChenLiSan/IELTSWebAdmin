@@ -60,12 +60,9 @@
                 </td>
                 
                 <td class="auto-style10">
-                    <asp:Label ID="Label2" runat="server" Text="Correct Answer: " Visible="False"></asp:Label>
-                </td>
+                    &nbsp;</td>
                 <td class="auto-style4">
-                    <asp:DropDownList ID="ddlCorrectAns" runat="server" Visible="False">
-                    </asp:DropDownList>
-                </td>
+                    &nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
@@ -74,8 +71,7 @@
                 
                 <td class="auto-style12">&nbsp;</td>
                 <td>
-                    <asp:Button ID="btnSave1" runat="server" OnClick="btnSave1_Click" Text="Save" Visible="False" />
-                </td>
+                    &nbsp;</td>
             </tr>
         </table>
 
@@ -91,7 +87,7 @@
             </asp:Repeater>
             <br />
             <br />
-            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Save" CausesValidation="False" />
+            <asp:Button ID="btnSave" runat="server" OnClick="btnSave_Click" Text="Proceed" CausesValidation="False" />
        
 
         </div>
