@@ -46,22 +46,9 @@ namespace IELTSWebAdmin
 
             //check the file
             Console.Write("Button clicked");
-            //if (FileUpload1.HasFile && FileUpload1.PostedFile != null
-            //    && FileUpload1.PostedFile.FileName != "")
-            //{
+
             HttpPostedFile file = FileUpload1.PostedFile;
-            //retrieve the HttpPostedFile object
-
-            //buffer = new byte[file.ContentLength];
-            //int bytesReaded = file.InputStream.Read(buffer, 0,
-            //                  FileUpload1.PostedFile.ContentLength);
-            //the HttpPostedFile has InputStream porperty (using System.IO;)
-            //which can read the stream to the buffer object,
-            //the first parameter is the array of bytes to store in,
-            //the second parameter is the zero index (of specific byte)
-            //where to start storing in the buffer,
-            //the third parameter is the number of bytes 
-
+  
 
             string filePath, fileName;
             if (FileUpload1.PostedFile != null)

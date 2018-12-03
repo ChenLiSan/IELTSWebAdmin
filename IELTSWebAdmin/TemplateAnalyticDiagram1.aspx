@@ -23,7 +23,7 @@
             <tr>
                 <td class="auto-style1">&nbsp;</td>
                 <td>
-                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
+                    <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand" OnItemDataBound="Repeater1_ItemDataBound">
 
                         <ItemTemplate>
                             <%#Container.ItemIndex+1 %>

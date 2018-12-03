@@ -13,15 +13,19 @@ namespace IELTSWebAdmin
     public partial class TemplateAnalyticDiagram1 : System.Web.UI.Page
     {
         static DataTable dt;
+        DropDownList ddl1;
+        static string[] word;
+        static DataTable dataTable;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+          
             int tq = (int)Session["TotalQ"];
+            
             if (!Page.IsPostBack)
             {
                 dt = new DataTable();
-               
+
             }
 
 
@@ -36,8 +40,8 @@ namespace IELTSWebAdmin
             SqlCommand cmdSelect = new SqlCommand(strSelect, conn);
             cmdSelect.Parameters.AddWithValue("@queID", queID);
             dtrAnsOpt = cmdSelect.ExecuteReader();
-
-
+            dataTable = new DataTable();
+ 
             if (dtrAnsOpt.HasRows)
             {
 
@@ -45,36 +49,40 @@ namespace IELTSWebAdmin
                 {
                     String AnsOpt = dtrAnsOpt.GetString(0);
 
+
                     dt.Columns.Add("DropDownList");
-                    string[] word = AnsOpt.Split('|');
-                    foreach (string w in word)
-                    {
-                       // Repeater1.Items.Add(new ListItem(w, w));
-                    }
+                    dataTable.Columns.Add("DropDownList");
+                    word = AnsOpt.Split('|');
+
 
                 }
             }
+
             else
             {
                 lblMessage.Text = "No Record Found!";
             }
 
-            conn.Close();
-            dtrAnsOpt.Close();
+                    conn.Close();
+                    dtrAnsOpt.Close();
 
-            dt.Columns.Add("Label");
-            for (int i = 0; i < tq; i++)
-            {
-                dt.Rows.Add();
+                    dt.Columns.Add("Label");
+                    for (int i = 0; i < tq; i++)
+                    {
+                        dt.Rows.Add();
+
+                    }
+                    this.Repeater1.DataSource = dt;
+                    this.Repeater1.DataBind();
+
                 
-            }
-            this.Repeater1.DataSource = dt;
-            this.Repeater1.DataBind();
-
+            
         }
 
         protected void btnSave1_Click(object sender, EventArgs e)
         {
+            
+            
             //try
             //{
             //    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -104,7 +112,27 @@ namespace IELTSWebAdmin
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
 
+        }   
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item ||
+                e.Item.ItemType == ListItemType.AlternatingItem)
+            {   
+
+                DropDownList ddl1 = (DropDownList)e.Item.FindControl("ddl1");
+                foreach (string w in word)
+                {
+                    if (!w.Equals(""))
+                    {
+                        ddl1.Items.Add(w);
+                    }
+                }
+                   
+
+            }
         }
+
 
         protected void ddlCorrectAns_SelectedIndexChanged(object sender, EventArgs e)
         {
