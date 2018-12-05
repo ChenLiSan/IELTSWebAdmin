@@ -197,5 +197,10 @@ namespace IELTSWebAdmin
                 Response.Redirect("FormSubsection.aspx");
             }
         }
+
+        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+        {
+
+        }
     }
 }

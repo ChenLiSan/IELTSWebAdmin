@@ -19,7 +19,7 @@
             </asp:DropDownList>
         <br />
 
-        <asp:Repeater ID="Repeater1" runat="server">
+        <asp:Repeater ID="Repeater1" runat="server" OnItemCommand="Repeater1_ItemCommand">
                 <ItemTemplate>
                     <%#Container.ItemIndex+1 %>
                     <asp:TextBox ID="txtTextBox1" runat="server" />
