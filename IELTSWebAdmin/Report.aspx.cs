@@ -13,14 +13,16 @@ namespace IELTSWebAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Set the processing mode for the ReportViewer to Local  
-            ReportViewer1.ProcessingMode = ProcessingMode.Local;
+            if (!this.IsPostBack)
+            {
+                // Set the processing mode for the ReportViewer to Local  
+                ReportViewer1.ProcessingMode = ProcessingMode.Local;
 
-            LocalReport localReport = ReportViewer1.LocalReport;
+                LocalReport localReport = ReportViewer1.LocalReport;
 
-            localReport.ReportPath = "C:\\Users\\Lysan Chen\\source\\repos\\IELTSWebAdmin\\IELTSWebAdmin\\Report1.rdlc";
+                localReport.ReportPath = "C:\\Users\\Lysan Chen\\source\\repos\\IELTSWebAdmin\\IELTSWebAdmin\\Report1.rdlc";
 
-
+            }
             //// Create the sales order number report parameter  
             //ReportParameter rpSalesOrderNumber = new ReportParameter();
             //rpSalesOrderNumber.Name = "SalesOrderNumber";

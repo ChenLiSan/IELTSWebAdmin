@@ -285,8 +285,6 @@ namespace IELTSWebAdmin {
             
             private global::System.Data.DataColumn columngrade;
             
-            private global::System.Data.DataColumn columnresult;
-            
             private global::System.Data.DataColumn columndate;
             
             private global::System.Data.DataColumn columnname;
@@ -352,14 +350,6 @@ namespace IELTSWebAdmin {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn resultColumn {
-                get {
-                    return this.columnresult;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public global::System.Data.DataColumn dateColumn {
                 get {
                     return this.columndate;
@@ -419,13 +409,12 @@ namespace IELTSWebAdmin {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row AddDataTable1Row(int candidate, int score, byte[] grade, byte[] result, System.DateTime date, string name, string studentID) {
+            public DataTable1Row AddDataTable1Row(int candidate, int score, string grade, System.DateTime date, string name, string studentID) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         candidate,
                         score,
                         grade,
-                        result,
                         date,
                         name,
                         studentID};
@@ -454,7 +443,6 @@ namespace IELTSWebAdmin {
                 this.columncandidate = base.Columns["candidate"];
                 this.columnscore = base.Columns["score"];
                 this.columngrade = base.Columns["grade"];
-                this.columnresult = base.Columns["result"];
                 this.columndate = base.Columns["date"];
                 this.columnname = base.Columns["name"];
                 this.columnstudentID = base.Columns["studentID"];
@@ -467,16 +455,15 @@ namespace IELTSWebAdmin {
                 base.Columns.Add(this.columncandidate);
                 this.columnscore = new global::System.Data.DataColumn("score", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnscore);
-                this.columngrade = new global::System.Data.DataColumn("grade", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                this.columngrade = new global::System.Data.DataColumn("grade", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columngrade);
-                this.columnresult = new global::System.Data.DataColumn("result", typeof(byte[]), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnresult);
                 this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndate);
                 this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnname);
                 this.columnstudentID = new global::System.Data.DataColumn("studentID", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstudentID);
+                this.columngrade.MaxLength = 50;
                 this.columnname.MaxLength = 200;
                 this.columnstudentID.MaxLength = 100;
             }
@@ -653,10 +640,10 @@ namespace IELTSWebAdmin {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public byte[] grade {
+            public string grade {
                 get {
                     try {
-                        return ((byte[])(this[this.tableDataTable1.gradeColumn]));
+                        return ((string)(this[this.tableDataTable1.gradeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'grade\' in table \'DataTable1\' is DBNull.", e);
@@ -664,22 +651,6 @@ namespace IELTSWebAdmin {
                 }
                 set {
                     this[this.tableDataTable1.gradeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public byte[] result {
-                get {
-                    try {
-                        return ((byte[])(this[this.tableDataTable1.resultColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'result\' in table \'DataTable1\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDataTable1.resultColumn] = value;
                 }
             }
             
@@ -765,18 +736,6 @@ namespace IELTSWebAdmin {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetgradeNull() {
                 this[this.tableDataTable1.gradeColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsresultNull() {
-                return this.IsNull(this.tableDataTable1.resultColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetresultNull() {
-                this[this.tableDataTable1.resultColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -978,7 +937,6 @@ namespace IELTSWebAdmin.DataSet1TableAdapters {
             tableMapping.ColumnMappings.Add("candidate", "candidate");
             tableMapping.ColumnMappings.Add("score", "score");
             tableMapping.ColumnMappings.Add("grade", "grade");
-            tableMapping.ColumnMappings.Add("result", "result");
             tableMapping.ColumnMappings.Add("date", "date");
             tableMapping.ColumnMappings.Add("name", "name");
             tableMapping.ColumnMappings.Add("studentID", "studentID");
@@ -998,7 +956,7 @@ namespace IELTSWebAdmin.DataSet1TableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        attempt.candidate, attempt.score, attempt.grade, attempt.result, session.date, candidate.name, candidate.studentID
+            this._commandCollection[0].CommandText = @"SELECT        attempt.candidate, attempt.score, attempt.grade, session.date, candidate.name, candidate.studentID
 FROM            attempt INNER JOIN
                          session ON attempt.sessionID = session.sessionID INNER JOIN
                          candidate ON attempt.candidate = candidate.candidateID";
