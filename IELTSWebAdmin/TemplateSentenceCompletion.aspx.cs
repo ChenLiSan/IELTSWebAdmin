@@ -13,7 +13,7 @@ namespace IELTSWebAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void Button1_Click1(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace IELTSWebAdmin
             if (tq > 1)
             {
                 Session["TotalQ"] = tq - 1;
-                Response.Redirect("TemplateMultipleChoice.aspx");
+                Response.Redirect("TemplateSentenceCompletion.aspx");
             }
             else
             {

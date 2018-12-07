@@ -22,7 +22,7 @@
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -52,6 +52,9 @@
     </Reference>
     <Reference Include="AspNet.ScriptManager.jQuery, Version=3.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.3.3.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FirebaseDatabase.net.3.3.3\lib\netstandard1.1\Firebase.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Storage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FirebaseStorage.net.1.0.2\lib\netstandard1.1\Firebase.Storage.dll</HintPath>
@@ -136,6 +139,9 @@
       <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Reactive, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.4.0.0\lib\net46\System.Reactive.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
@@ -179,6 +185,8 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -220,6 +228,7 @@
     <Reference Include="Microsoft.AspNet.FriendlyUrls">
       <HintPath>..\packages\Microsoft.AspNet.FriendlyUrls.Core.1.0.2\lib\net45\Microsoft.AspNet.FriendlyUrls.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -311,6 +320,8 @@
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="AddExamSession.aspx" />
     <Content Include="AddTextbox.js" />
+    <Content Include="AdminLogin.aspx" />
+    <Content Include="AdminRegistration1.aspx" />
     <Content Include="answerOpt.png" />
     <Content Include="App_Data\WebAdmin.mdf" />
     <Content Include="App_Data\WebAdmin_log.ldf">
@@ -342,7 +353,7 @@
     <Content Include="js\sb-admin-datatables.min.js" />
     <Content Include="js\sb-admin.js" />
     <Content Include="js\sb-admin.min.js" />
-    <Content Include="ManageTemplate.aspx" />
+    <Content Include="landingPage.aspx" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -412,6 +423,8 @@
     <Content Include="Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IELTSWebAdmin20181207125604 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -432,7 +445,6 @@
     </Content>
     <Content Include="TemplateAnalyticDiagram.aspx" />
     <Content Include="TemplateAnalyticDiagram1.aspx" />
-    <Content Include="TemplateMap.aspx" />
     <Content Include="TemplateMatchingAll.aspx" />
     <Content Include="TemplateMatchingAns.aspx" />
     <Content Include="TemplateMatchingAnsOpt.aspx" />
@@ -626,6 +638,20 @@
     <Compile Include="AddExamSession.aspx.designer.cs">
       <DependentUpon>AddExamSession.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminLogin.aspx.cs">
+      <DependentUpon>AdminLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminLogin.aspx.designer.cs">
+      <DependentUpon>AdminLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminRegistration1.aspx.cs">
+      <DependentUpon>AdminRegistration1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminRegistration1.aspx.designer.cs">
+      <DependentUpon>AdminRegistration1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -694,12 +720,12 @@
     <Compile Include="googleLogin.aspx.designer.cs">
       <DependentUpon>googleLogin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ManageTemplate.aspx.cs">
-      <DependentUpon>ManageTemplate.aspx</DependentUpon>
+    <Compile Include="landingPage.aspx.cs">
+      <DependentUpon>landingPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ManageTemplate.aspx.designer.cs">
-      <DependentUpon>ManageTemplate.aspx</DependentUpon>
+    <Compile Include="landingPage.aspx.designer.cs">
+      <DependentUpon>landingPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -794,13 +820,6 @@
     </Compile>
     <Compile Include="TemplateAnalyticDiagram1.aspx.designer.cs">
       <DependentUpon>TemplateAnalyticDiagram1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TemplateMap.aspx.cs">
-      <DependentUpon>TemplateMap.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TemplateMap.aspx.designer.cs">
-      <DependentUpon>TemplateMap.aspx</DependentUpon>
     </Compile>
     <Compile Include="TemplateMatchingAll.aspx.cs">
       <DependentUpon>TemplateMatchingAll.aspx</DependentUpon>
@@ -966,6 +985,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Report1.rdlc" />
+    <EmbeddedResource Include="Report2.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

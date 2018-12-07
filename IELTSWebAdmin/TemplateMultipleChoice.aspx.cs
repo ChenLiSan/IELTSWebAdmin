@@ -20,8 +20,6 @@ namespace IELTSWebAdmin
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Label2.Text = Session["TotalQ"].ToString();
-
             if (!Page.IsPostBack)
             {
                 dt = new DataTable();

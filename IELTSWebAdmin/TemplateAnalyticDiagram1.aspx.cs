@@ -81,64 +81,8 @@ namespace IELTSWebAdmin
             
         }
 
-        protected void btnSave1_Click(object sender, EventArgs e)
-        {
-            ControlCollection gv = this.Repeater1.Controls;
-            int j = 0;
+       
 
-
-            foreach (Control c in gv)
-            {
-                foreach (Control childc in c.Controls)
-                {
-                    if (childc is DropDownList)
-                    {
-                        answer[j] = (String)((DropDownList)childc).SelectedValue;
-                        j++;
-                    }
-                }
-            }
-
-            try
-            {
-                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(constr))
-
-                using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerText = @AnswerText WHERE questionID = @queID"))
-                {
-                    cmd.Connection = con;
-                    cmd.Parameters.AddWithValue("@AnswerText", insertString(answer));
-                    int queID = (int)Session["qID"];
-                    cmd.Parameters.AddWithValue("@queID", queID);
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
-
-                }
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
-            }
-
-            Response.Redirect("FormSubsection.aspx");
-        }
-
-        private String insertString(String[] answer)
-        {
-            string answerString = "";
-
-            for (int i = 0; i < answer.Length; i++)
-            {
-                if (answer[i] != "")
-                {
-                    answerString += answer[i] + "|";
-                }
-            }
-
-            return answerString;
-        }
 
         protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
@@ -168,6 +112,51 @@ namespace IELTSWebAdmin
         protected void ddlCorrectAns_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnProceed_Click(object sender, EventArgs e)
+        {
+
+            ControlCollection gv = this.Repeater1.Controls;
+            int j = 0;
+
+
+            foreach (Control c in gv)
+            {
+                foreach (Control childc in c.Controls)
+                {
+                    if (childc is DropDownList)
+                    {
+                        answer[j] = (String)((DropDownList)childc).SelectedValue;
+                        j++;
+                    }
+                }
+            }
+
+            try
+            {
+                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                using (SqlConnection con = new SqlConnection(constr))
+
+                using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerText = @AnswerText WHERE questionID = @queID"))
+                {
+                    cmd.Connection = con;
+                    cmd.Parameters.AddWithValue("@AnswerText", answer[j]);
+                    int queID = (int)Session["qID"];
+                    cmd.Parameters.AddWithValue("@queID", queID);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
+            }
+
+            Response.Redirect("FormSubsection.aspx");
         }
     }
 }

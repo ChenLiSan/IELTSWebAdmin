@@ -28,10 +28,8 @@ namespace IELTSWebAdmin
             if (!IsPostBack)
             {
                 Session["currentQ"] = 1;
-
             }
-
-
+            
         }
 
         byte[] buffer;
@@ -126,7 +124,15 @@ namespace IELTSWebAdmin
 
         protected void btnProceed_Click(object sender, EventArgs e)
         {
-            Response.Redirect("FormSubsection.aspx");
+            if (ddlSection.SelectedValue.Equals(""))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please select section number')", true);
+
+            }
+            else
+            {
+                Response.Redirect("FormSubsection.aspx");
+            }
         }
 
         protected void ddlSection_SelectedIndexChanged(object sender, EventArgs e)

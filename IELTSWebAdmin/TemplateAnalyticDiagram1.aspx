@@ -45,13 +45,14 @@
             <tr>
                 <td class="auto-style1">&nbsp;</td>
                 <td>
-                    <asp:Button ID="btnSave1" runat="server" OnClick="btnSave1_Click" Text="Proceed" Visible="False" style="height: 33px" />
-                </td>
+                    &nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style1">&nbsp;</td>
-                <td>&nbsp;</td>
+                <td>
+                    <asp:Button ID="btnProceed" runat="server" OnClick="btnProceed_Click" Text="Proceed" />
+                </td>
                 <td>&nbsp;</td>
             </tr>
         </table>

@@ -7,14 +7,9 @@ using System.Web.UI.WebControls;
 
 namespace IELTSWebAdmin
 {
-    public partial class ManageTemplate : System.Web.UI.Page
+    public partial class landingPage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnMap_Click(object sender, EventArgs e)
         {
 
         }
