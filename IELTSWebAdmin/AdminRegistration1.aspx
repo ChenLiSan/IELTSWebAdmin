@@ -5,14 +5,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            width: 501px;
-        }
-        .auto-style2 {
-            width: 398px;
-        }
-    </style>
+
+   <meta charset="utf-8"/>
+
+   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+   <link rel="stylesheet" href="style.css"/>
+
+   <script src="main.js"></script>
+
+   <link rel="stylesheet" href="bootstrap-theme.min.css"/>
 </head>
 <body>
     <form id="form2" runat="server">
