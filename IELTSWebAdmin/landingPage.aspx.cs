@@ -11,7 +11,10 @@ namespace IELTSWebAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["user"] != null)
+            {
+                Label1.Text = "Welcome, " + Session["user"].ToString();
+            }
         }
     }
 }

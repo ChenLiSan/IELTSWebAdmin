@@ -136,10 +136,9 @@ namespace IELTSWebAdmin
                 Label4.Text = ex.Message.ToString();
             }
             address = (string)Session["address"];
+            totalQ = (int)Session["TotalQ"];
 
             Response.Redirect(address);
-
-            totalQ = (int)Session["TotalQ"];
         }
 
         protected async void btnUpload_ClickAsync(object sender, EventArgs e)

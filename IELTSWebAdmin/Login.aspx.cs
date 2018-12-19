@@ -31,8 +31,7 @@ namespace IELTSWebAdmin
                 if (txtUsername.Value == dtrLoginDetail.GetString(0))
                     if (txtPass.Value == dtrLoginDetail.GetString(1))
                     {
-
-                        //Session["StaffID"] = staffID;
+                        Session["user"] = txtUsername.Value;
                         Response.Redirect("landingPage.aspx", false);
                     }
             }

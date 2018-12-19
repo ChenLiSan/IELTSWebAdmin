@@ -87,16 +87,18 @@ namespace IELTSWebAdmin
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
             }
 
-            lblQ.Visible = false;
-            txtQ.Visible = false;
-            lblAnsOpt.Visible = false;
-            ddlNumberOfRows.Visible = false;
+            lbl1.Enabled = false;
+            lblQ.Enabled = false;
+            txtQ.Enabled = false;
+            lblAnsOpt.Enabled = false;
+            ddlNumberOfRows.Enabled = false;
             Repeater1.Visible = false;
-            Button1.Visible = false;
+            Button1.Enabled = false;
 
-            Label2.Visible = true;
-            ddlCorrectAns.Visible = true;
-            btnSave1.Visible = true;
+            lbl2.Enabled = true;
+            Label2.Enabled = true;
+            ddlCorrectAns.Enabled = true;
+            btnSave1.Enabled = true;
 
             String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection conn = new SqlConnection(strConn);

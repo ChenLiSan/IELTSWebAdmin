@@ -10,8 +10,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form id="form1" runat="server">
-        <h2>
-        <asp:Label ID="Label1" runat="server" Text="Label" CssClass="auto-style1">Welcome, Admin</asp:Label>
-            </h2>
+        <h3>
+        <asp:Label ID="Label1" runat="server" CssClass="auto-style1"></asp:Label>
+            </h3>
     </form>
 </asp:Content>

@@ -23,10 +23,6 @@ namespace IELTSWebAdmin
                 ReportViewer1.LocalReport.ReportPath = "Report1.rdlc";
                 ReportViewer1.LocalReport.Refresh();
 
-
-
-
-
             }
             //// Create the sales order number report parameter  
             //ReportParameter rpSalesOrderNumber = new ReportParameter();
