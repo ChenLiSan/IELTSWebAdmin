@@ -33,12 +33,14 @@
                             <div class="form-group">
                                 <asp:label runat="server" for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></asp:label>
                                 <input runat="server" type="text" name="your_name" id="txtUsername" placeholder="Your Name"/>
-                            </div>
+                                <asp:Label ID="lblMessage" runat="server" ForeColor="#FF3300"></asp:Label>
+
+                            &nbsp;</div>
                             <div class="form-group">
                                 <asp:label runat="server" for="your_pass"><i class="zmdi zmdi-lock"></i></asp:label>
                                 <input runat="server" type="password" name="your_pass" id="txtPass" placeholder="Password"/>
                             </div>
-                          <%--  <div class="form-group">
+                        <%--  <div class="form-group">
                                 <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
                                 <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
                             </div>--%>
@@ -46,7 +48,7 @@
                             <asp:Button runat="server" text="Login" type="submit" name="signin" id="signin" class="form-submit" value="Log in" OnClick="signin_Click" />
                         </div>
                     </form>
-                       <%-- <div class="social-login">
+                        <%-- <div class="social-login">
                             <span class="social-label">Or login with</span>
                             <ul class="socials">
                                 <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>

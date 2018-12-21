@@ -34,8 +34,13 @@ namespace IELTSWebAdmin
                         Session["user"] = txtUsername.Value;
                         Response.Redirect("landingPage.aspx", false);
                     }
+                    else
+                    {
+                        lblMessage.Text = "Incorrect username or password";
+                    }
             }
             conn.Close();
         }
+
     }
 }

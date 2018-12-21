@@ -2,12 +2,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
         .auto-style2 {
-            width: 290px;
-        }
+        width: 290px;
+    }
         .auto-style3 {
-            width: 290px;
-            height: 29px;
-        }
+        width: 290px;
+        height: 29px;
+    }
         .auto-style5 {
             height: 29px;
             width: 176px;
@@ -16,9 +16,9 @@
             width: 176px;
         }
         .auto-style13 {
-            width: 290px;
-            height: 26px;
-        }
+        width: 290px;
+        height: 26px;
+    }
         .auto-style14 {
             width: 176px;
             height: 26px;

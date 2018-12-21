@@ -23,21 +23,23 @@ namespace IELTSWebAdmin
         static DataTable dataTable;
         static String[] answer1;
         int tq;
-        int qID;
+        static int [] qID;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
             tq = (int)Session["TotalQ"];
 
             if (!Page.IsPostBack)
             {
                 //declare for repeater1
                 dt = new DataTable();
-                answer = new String[5];
+                answer = new String[10];
                 //declare for repeater2
                 dt1 = new DataTable();
                 answer1 = new String[15];
+
+                qID = new int[tq];
+                int y = 0;
             }
         }
 
@@ -75,6 +77,7 @@ namespace IELTSWebAdmin
                 }
             }
             //insert answerOptions into db
+            for(int i=0; i<tq; i++) { 
             try
             {
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -86,9 +89,9 @@ namespace IELTSWebAdmin
                         cmd.Parameters.AddWithValue("@AnswerOptions", insertString(answer));
                         con.Open();
                         int queIDs = Convert.ToInt32(cmd.ExecuteScalar());
-                        cmd.ExecuteNonQuery();
+                       // cmd.ExecuteNonQuery();
                         con.Close();
-                        qID = queIDs;
+                        qID[i] = queIDs;
                         //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
                     }
                 }
@@ -97,8 +100,8 @@ namespace IELTSWebAdmin
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
             }
+                }
             //Response.Redirect("TemplateAnalyticDiagram1.aspx");
-
 
             //retrieve answer options and dislay it into dynamic ddl
             String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
@@ -109,7 +112,7 @@ namespace IELTSWebAdmin
             String strSelect = "Select answerOptions from Question WHERE questionID = @queID";
 
             SqlCommand cmdSelect = new SqlCommand(strSelect, conn);
-            cmdSelect.Parameters.AddWithValue("@queID", qID);
+            cmdSelect.Parameters.AddWithValue("@queID", qID[0]);
             dtrAnsOpt = cmdSelect.ExecuteReader();
             dataTable = new DataTable();
 
@@ -190,34 +193,36 @@ namespace IELTSWebAdmin
                 {
                     if (childc is DropDownList)
                     {
-                        answer[j] = (String)((DropDownList)childc).SelectedValue;
+                        answer1[j] = (String)((DropDownList)childc).SelectedValue;
                         j++;
                     }
                 }
             }
 
-            try
+            for (int i = 0; i < tq; i++)
             {
-                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(constr))
-
-                using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerText = @AnswerText WHERE questionID = @queID"))
+                try
                 {
-                    cmd.Connection = con;
-                    cmd.Parameters.AddWithValue("@AnswerText", answer[j]);
-                    cmd.Parameters.AddWithValue("@queID", qID);
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+                    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
 
+                    using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerText = @AnswerText WHERE questionID = @queID"))
+                    {
+                        cmd.Connection = con;
+                        cmd.Parameters.AddWithValue("@AnswerText", answer1[i]);
+                        cmd.Parameters.AddWithValue("@queID", qID[i]);
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
                 }
             }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
-            }
-
             Response.Redirect("FormSubsection.aspx");
         }
         
