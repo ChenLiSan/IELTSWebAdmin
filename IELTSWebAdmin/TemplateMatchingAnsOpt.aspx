@@ -21,15 +21,15 @@
             height: 272px;
         }
         .auto-style10 {
-            width: 575px;
+            width: 1302px;
             height: 78px;
         }
         .auto-style11 {
-            width: 575px;
+            width: 1302px;
             height: 272px;
         }
         .auto-style12 {
-            width: 575px;
+            width: 1302px;
         }
     </style>
 </asp:Content>
@@ -39,7 +39,12 @@
           <table class="auto-style4">
               <tr>
                   <td class="auto-style10">
-            <asp:Label ID="Label2" runat="server" Text="Number of Answer Options"></asp:Label>
+                      &nbsp;</td>
+                  <td class="auto-style7">&nbsp;</td>
+              </tr>
+              <tr>
+                  <td class="auto-style10">
+            <asp:Label ID="Label2" runat="server" Text="No of answer options"></asp:Label>
             <asp:DropDownList ID="ddlNumberOfRows" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlNumberOfRows_SelectedIndexChanged">
                 <asp:ListItem Text="One" Value="1" />
                 <asp:ListItem Text="Two" Value="2" />
@@ -47,9 +52,7 @@
                 <asp:ListItem Text="Four" Value="4" />
             </asp:DropDownList>
                   </td>
-                  <td class="auto-style7">&nbsp;</td>
                   <td class="auto-style7">Example of Answer Options:</td>
-                  <td class="auto-style5" rowspan="3">&nbsp;</td>
               </tr>
               <tr>
                   <td class="auto-style11">
@@ -65,7 +68,6 @@
        
 
                   </td>
-                  <td class="auto-style9">&nbsp;</td>
                   <td class="auto-style9">
                       <img alt="" class="auto-style3" src="answerOpt.png" /></td>
               </tr>
@@ -73,7 +75,6 @@
                   <td class="auto-style12">
                       <asp:Button ID="btnProceed" runat="server" OnClick="btnProceed_Click" Text="Proceed" />
                   </td>
-                  <td class="auto-style5">&nbsp;</td>
                   <td class="auto-style5">&nbsp;</td>
               </tr>
           </table>

@@ -14,10 +14,15 @@ namespace IELTSWebAdmin
     {
         static DataTable dt;
         static String[] answer;
-
-
+        static int[] id;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
+            int id = (int)Session["ID"];
+            for (int i = 0; i < id; i++)
+            {
+               
+            }
 
             if (!Page.IsPostBack)
             {
@@ -58,12 +63,14 @@ namespace IELTSWebAdmin
                 }
             }
 
-            try
+            for (int i = 0; i < id.Length ; i++)
+            {
+                try
             {
                 string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 using (SqlConnection con = new SqlConnection(constr))
                 {
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO QUESTION(answerOptions) VALUES(@AnswerOptions)"))
+                    using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerOptions = @AnswerOptions WHERE questionID = @queID"))
                     {
                         cmd.Connection = con;
                         cmd.Parameters.AddWithValue("@AnswerOptions", insertString(answer));
@@ -79,6 +86,7 @@ namespace IELTSWebAdmin
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
             }
         }
+    }
 
 
         private String insertString(String[] answer)

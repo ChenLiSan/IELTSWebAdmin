@@ -378,6 +378,7 @@
     <Content Include="js\sb-admin.min.js" />
     <Content Include="landingPage.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="mainQ.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -391,6 +392,7 @@
     <Content Include="place.js" />
     <Content Include="Registration.aspx" />
     <Content Include="Report.aspx" />
+    <Content Include="SampleReportaspx.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -831,6 +833,7 @@
     <Compile Include="googleLogin.aspx.designer.cs">
       <DependentUpon>googleLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="JSONModel\Staff.cs" />
     <Compile Include="landingPage.aspx.cs">
       <DependentUpon>landingPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -887,6 +890,13 @@
     </Compile>
     <Compile Include="role.cs">
       <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SampleReportaspx.aspx.cs">
+      <DependentUpon>SampleReportaspx.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SampleReportaspx.aspx.designer.cs">
+      <DependentUpon>SampleReportaspx.aspx</DependentUpon>
     </Compile>
     <Compile Include="section.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -1125,6 +1135,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="Report2.rdlc" />
+    <EmbeddedResource Include="SampleReport.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
