@@ -20,16 +20,19 @@ namespace IELTSWebAdmin
 
         static DataTable dt1;
         static DataTable dataTable;
+        static int sessionI = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             id = (List<int>)Session["ID"];
             queText = (List<string>)Session["queText"];
+            
             lblMessage.Text = id.Count.ToString();
             
 
             if (!Page.IsPostBack)
             {
+                Session["queIndex"] = 0;
                 dt = new DataTable();
                 dt1 = new DataTable();
                 answer = new String[5];
@@ -132,6 +135,7 @@ namespace IELTSWebAdmin
             }
             this.Repeater2.DataSource = dt1;
             this.Repeater2.DataBind();
+           
 
             btnProceed.Enabled = true;
         }
@@ -157,7 +161,9 @@ namespace IELTSWebAdmin
             if (e.Item.ItemType == ListItemType.Item ||
                 e.Item.ItemType == ListItemType.AlternatingItem)
             {
+                //Label lbl3 = (Label)e.Item.FindControl("lbl3");
                 DropDownList ddl2 = (DropDownList)e.Item.FindControl("ddl2");
+                
                 foreach (string w in word)
                 { 
                     if (!w.Equals(""))
@@ -165,6 +171,20 @@ namespace IELTSWebAdmin
                         ddl2.Items.Add(w);
                     }
                 }
+                
+            }
+
+            try
+            {
+                Label lbl3 = (Label)e.Item.FindControl("lbl3");
+
+                sessionI = (int)Session["queIndex"];
+                lbl3.Text = queText[sessionI];
+                sessionI++;
+                Session["queIndex"] = sessionI;
+            }
+            catch (Exception ex) { 
+
             }
         }
     }

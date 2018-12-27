@@ -103,7 +103,7 @@
 
                         <ItemTemplate>
                             <%#Container.ItemIndex+1 %>
-                            <asp:Label ID="lbl3" runat="server" />
+                            <asp:Label ID="lbl3" runat="server" ViewStateMode="Inherit" />
                         </ItemTemplate>
 
                         <ItemTemplate>
