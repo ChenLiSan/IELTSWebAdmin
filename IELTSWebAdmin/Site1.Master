@@ -27,14 +27,14 @@
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet" type="text/css"/>
+<%--  <link href="css/sb-admin.css" rel="stylesheet" type="text/css"/>--%>
        <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+<body class="fixed-nav sticky-footer" id="page-top">
   <!-- Navigation-->
    <%-- <form id="form1" runat="server">--%>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">IELTS Admin</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

@@ -14,26 +14,30 @@ namespace IELTSWebAdmin
     {
         static DataTable dt;
         static String[] answer;
-        static int[] id;
-        
+        static List<int> id;
+        static List<String> queText;
+        static string[] word;
+
+        static DataTable dt1;
+        static DataTable dataTable;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id = (int)Session["ID"];
-            for (int i = 0; i < id; i++)
-            {
-               
-            }
+            id = (List<int>)Session["ID"];
+            queText = (List<string>)Session["queText"];
+            lblMessage.Text = id.Count.ToString();
+            
 
             if (!Page.IsPostBack)
             {
                 dt = new DataTable();
+                dt1 = new DataTable();
                 answer = new String[5];
             }
         }
 
         protected void ddlNumberOfRows_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             dt.Columns.Add("TextBox");
             int count = Convert.ToInt32(ddlNumberOfRows.SelectedItem.Value);
             for (int i = 0; i < count; i++)
@@ -63,7 +67,7 @@ namespace IELTSWebAdmin
                 }
             }
 
-            for (int i = 0; i < id.Length ; i++)
+            for (int i = 0; i < id.Count ; i++)
             {
                 try
             {
@@ -74,6 +78,7 @@ namespace IELTSWebAdmin
                     {
                         cmd.Connection = con;
                         cmd.Parameters.AddWithValue("@AnswerOptions", insertString(answer));
+                        cmd.Parameters.AddWithValue("@queID",id[i]);
                         con.Open();
                         cmd.ExecuteNonQuery();
                         con.Close();
@@ -85,8 +90,51 @@ namespace IELTSWebAdmin
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
             }
+
         }
-    }
+            //retrieve answer options and dislay it into dynamic ddl
+            String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            SqlConnection conn = new SqlConnection(strConn);
+            SqlDataReader dtrAnsOpt;
+            conn.Open();
+
+            String strSelect = "Select answerOptions from Question WHERE questionID = @queID";
+
+            SqlCommand cmdSelect = new SqlCommand(strSelect, conn);
+            cmdSelect.Parameters.AddWithValue("@queID", id[0]);
+            dtrAnsOpt = cmdSelect.ExecuteReader();
+            dataTable = new DataTable();
+
+            if (dtrAnsOpt.HasRows)
+            {
+                while (dtrAnsOpt.Read())
+                {
+                    String AnsOpt = dtrAnsOpt.GetString(0);
+
+                    dt1.Columns.Add("DropDownList");
+                    dataTable.Columns.Add("DropDownList");
+                    word = AnsOpt.Split('|');
+                }
+            }
+
+            else
+            {
+                lblMessage.Text = "No Record Found!";
+            }
+
+            conn.Close();
+            dtrAnsOpt.Close();
+
+            dt1.Columns.Add("Label");
+            for (int i = 0; i < id.Count; i++)
+            {
+                dt1.Rows.Add();
+            }
+            this.Repeater2.DataSource = dt1;
+            this.Repeater2.DataBind();
+
+            btnProceed.Enabled = true;
+        }
 
 
         private String insertString(String[] answer)
@@ -102,6 +150,22 @@ namespace IELTSWebAdmin
             }
 
             return answerString;
+        }
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item ||
+                e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                DropDownList ddl2 = (DropDownList)e.Item.FindControl("ddl2");
+                foreach (string w in word)
+                { 
+                    if (!w.Equals(""))
+                    {
+                        ddl2.Items.Add(w);
+                    }
+                }
+            }
         }
     }
 }

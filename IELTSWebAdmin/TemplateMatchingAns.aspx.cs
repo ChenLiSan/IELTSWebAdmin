@@ -14,7 +14,8 @@ namespace IELTSWebAdmin
     {
         static DataTable dt;
         static List<String> question;
-        static int[] id;
+        static List<int> id;
+        static List<String> queText;
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,8 +23,8 @@ namespace IELTSWebAdmin
             {
                 dt = new DataTable();
                 question = new List<String>();
-
-                id = new int[5];
+                id = new List<int>();
+                queText = new List<String>();
             }
         }
 
@@ -52,7 +53,7 @@ namespace IELTSWebAdmin
                 {
                     if (childc is TextBox)
                     {
-                        question.Add ((String)((TextBox)childc).Text);
+                        question.Add((String)((TextBox)childc).Text);
                         j++;
                     }
                 }
@@ -75,7 +76,6 @@ namespace IELTSWebAdmin
 
             for (int a = 0; a < question.Count; a++)
             {
-
                 string constr1 = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
                 using (SqlConnection con1 = new SqlConnection(constr1))
 
@@ -87,13 +87,16 @@ namespace IELTSWebAdmin
                     int maxId = Convert.ToInt32(cmd1.ExecuteScalar());
                     //cmd1.ExecuteNonQuery();
                     con1.Close();
-                    id[a] = maxId;
+                    id.Add(maxId);
+                    queText.Add(question[a]);
                     Session["ID"] = id;
+                    Session["queText"] = queText;
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+                    Response.Write("question text : " + queText[a]);
                 }
 
             }
-
+            Response.Redirect("TemplateMatchingAnsOpt.aspx");
         }
     }
 }

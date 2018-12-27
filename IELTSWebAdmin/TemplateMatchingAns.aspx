@@ -30,6 +30,23 @@
                 <tr>
                     <td class="auto-style3">
 
+                    <strong>
+                    <asp:Label ID="lbl1" runat="server" Text="Step 1: Insert questions text"></asp:Label>
+                    </strong>
+                    </td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="auto-style3">
+
+                        &nbsp;</td>
+                    <td>
+                        &nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="auto-style3">
+
             <asp:Label ID="Label1" runat="server" Text="Main Question:"></asp:Label>
             <asp:TextBox ID="txtQ" runat="server" Width="425px"></asp:TextBox>
                     </td>
