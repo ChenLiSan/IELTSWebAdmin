@@ -552,12 +552,12 @@
     </Content>
     <Content Include="TemplateAnalyticDiagram.aspx" />
     <Content Include="TemplateAnalyticDiagram1.aspx" />
-    <Content Include="TemplateMatchingAll.aspx" />
     <Content Include="TemplateMatchingAns.aspx" />
     <Content Include="TemplateMatchingAnsOpt.aspx" />
     <Content Include="TemplateMultipleChoice.aspx" />
     <Content Include="TemplateSentenceCompletion.aspx" />
     <Content Include="TemplateShortAnswer.aspx" />
+    <Content Include="vendor\font-awesome\css\fontawesome.min.css" />
     <Content Include="vendor\jquery\jquery-ui.min.js" />
     <Content Include="View.aspx" />
     <Content Include="WebForm2.aspx" />
@@ -928,6 +928,13 @@
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
+    <Compile Include="Site2.Master.cs">
+      <DependentUpon>Site2.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site2.Master.designer.cs">
+      <DependentUpon>Site2.Master</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="staff.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -955,13 +962,6 @@
     </Compile>
     <Compile Include="TemplateAnalyticDiagram1.aspx.designer.cs">
       <DependentUpon>TemplateAnalyticDiagram1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="TemplateMatchingAll.aspx.cs">
-      <DependentUpon>TemplateMatchingAll.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TemplateMatchingAll.aspx.designer.cs">
-      <DependentUpon>TemplateMatchingAll.aspx</DependentUpon>
     </Compile>
     <Compile Include="TemplateMatchingAns.aspx.cs">
       <DependentUpon>TemplateMatchingAns.aspx</DependentUpon>
@@ -1110,6 +1110,7 @@
     <Content Include="scss\layouts\main.scss" />
     <Content Include="scss\layouts\responsive.scss" />
     <Content Include="scss\style.scss" />
+    <Content Include="Site2.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

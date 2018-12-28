@@ -17,6 +17,7 @@ namespace IELTSWebAdmin
         static List<int> id;
         static List<String> queText;
         static string[] word;
+        static String[] answer1;
 
         static DataTable dt1;
         static DataTable dt2;
@@ -28,7 +29,7 @@ namespace IELTSWebAdmin
             id = (List<int>)Session["ID"];
             queText = (List<string>)Session["queText"];
 
-            lblMessage.Text = id.Count.ToString();
+            //lblMessage.Text = id.Count.ToString();
 
 
             if (!Page.IsPostBack)
@@ -38,6 +39,7 @@ namespace IELTSWebAdmin
                 dt1 = new DataTable();
                 dt2 = new DataTable();
                 answer = new String[5];
+                answer1 = new String[15];
             }
         }
 
@@ -140,6 +142,9 @@ namespace IELTSWebAdmin
             {
                 dt1.Rows.Add(queText[sessionI]);
             }
+            this.Repeater3.DataSource = dt1;
+            this.Repeater3.DataBind();
+
             this.Repeater2.DataSource = dt1;
             this.Repeater2.DataBind();
 
@@ -195,7 +200,59 @@ namespace IELTSWebAdmin
                 lbl3.Text = queText[sessionI];
                 sessionI++;
                 Session["queIndex"] = sessionI;
+
+                
             }
         }
+
+        protected void btnProceed2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void btnProceed2_Click1(object sender, EventArgs e)
+        {
+            ControlCollection gv = this.Repeater2.Controls;
+            int j = 0;
+
+
+            foreach (Control c in gv)
+            {
+                foreach (Control childc in c.Controls)
+                {
+                    if (childc is DropDownList)
+                    {
+                        answer1[j] = (String)((DropDownList)childc).SelectedValue;
+                        j++;
+                    }
+                }
+            }
+
+            for (int i = 0; i < id.Count; i++)
+            {
+                try
+                {
+                    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
+
+                    using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerText = @AnswerText WHERE questionID = @queID"))
+                    {
+                        cmd.Connection = con;
+                        cmd.Parameters.AddWithValue("@AnswerText", answer1[i]);
+                        cmd.Parameters.AddWithValue("@queID", id[i]);
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
+                }
+            }
+            Response.Redirect("FormSubsection.aspx");
+        }
     }
-}
+    }
