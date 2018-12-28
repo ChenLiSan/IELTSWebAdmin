@@ -1,10 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site1.Master" AutoEventWireup="true" CodeBehind="TemplateMatchingAnsOpt.aspx.cs" Inherits="IELTSWebAdmin.TemplateMatchingAnsOpt" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style type="text/css">
-        .auto-style3 {
-            width: 391px;
-            height: 286px;
-        }
         .auto-style4 {
             width: 91%;
             height: 497px;
@@ -21,26 +17,30 @@
             height: 272px;
         }
         .auto-style10 {
-            width: 629px;
+            width: 457px;
             height: 78px;
         }
         .auto-style11 {
-            width: 629px;
+            width: 457px;
             height: 272px;
         }
         .auto-style12 {
-            width: 629px;
+            width: 457px;
         }
         .auto-style13 {
-            width: 355px;
+            width: 199px;
             height: 78px;
         }
         .auto-style14 {
-            width: 355px;
+            width: 199px;
             height: 272px;
         }
         .auto-style15 {
-            width: 355px;
+            width: 199px;
+        }
+        .auto-style16 {
+            width: 85px;
+            height: 272px;
         }
     </style>
 </asp:Content>
@@ -52,7 +52,7 @@
                   <td class="auto-style10">
                       &nbsp;</td>
                   <td class="auto-style13">&nbsp;</td>
-                  <td class="auto-style7">&nbsp;</td>
+                  <td class="auto-style7" colspan="2">&nbsp;</td>
               </tr>
               <tr>
                   <td class="auto-style10">
@@ -61,7 +61,7 @@
                     </strong>
                     </td>
                   <td class="auto-style13">&nbsp;</td>
-                  <td class="auto-style7">
+                  <td class="auto-style7" colspan="2">
                     <strong>
                     <asp:Label ID="lbl2" runat="server" Text="Step 3: Choose correct answer"></asp:Label>
                     </strong>
@@ -77,8 +77,8 @@
                 <asp:ListItem Text="Four" Value="4" />
             </asp:DropDownList>
                   </td>
-                  <td class="auto-style13">Example of Answer Options:</td>
-                  <td class="auto-style7">
+                  <td class="auto-style13">&nbsp;</td>
+                  <td class="auto-style7" colspan="2">
                       <asp:Label ID="lblMessage" runat="server"></asp:Label>
                   </td>
               </tr>
@@ -97,15 +97,21 @@
 
                   </td>
                   <td class="auto-style14">
-                      <img alt="" class="auto-style3" src="answerOpt.png" /></td>
-                  <td class="auto-style9">
-                    <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound">
-
-                        <ItemTemplate>
+                      &nbsp;</td>
+                  <td class="auto-style16">
+                      <asp:Repeater ID="Repeater3" runat="server" OnItemDataBound="Repeater3_ItemDataBound">
+                          <ItemTemplate>
                             <%#Container.ItemIndex+1 %>
-                            <asp:Label ID="lbl3" runat="server" ViewStateMode="Inherit" />
+                            <asp:Label ID="label3" runat="server"  ViewStateMode="Inherit" />
                         </ItemTemplate>
-
+                           <SeparatorTemplate>
+                            <br />
+                        </SeparatorTemplate>
+                      </asp:Repeater>
+                      <br />
+                  </td>
+                  <td class="auto-style9">
+                    <asp:Repeater ID="Repeater2" runat="server" OnItemDataBound="Repeater2_ItemDataBound">                    
                         <ItemTemplate>
                             <%#Container.ItemIndex+1 %>
                             <asp:DropDownList ID="ddl2" runat="server" />
@@ -122,7 +128,7 @@
                       <asp:Button ID="btnProceed" runat="server" OnClick="btnProceed_Click" Text="Proceed" />
                   </td>
                   <td class="auto-style15">&nbsp;</td>
-                  <td class="auto-style5">
+                  <td class="auto-style5" colspan="2">
                       <asp:Button ID="btnProceed2" runat="server" Text="Proceed" />
                   </td>
               </tr>

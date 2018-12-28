@@ -19,6 +19,7 @@ namespace IELTSWebAdmin
         static string[] word;
 
         static DataTable dt1;
+        static DataTable dt2;
         static DataTable dataTable;
         static int sessionI = 0;
 
@@ -26,15 +27,16 @@ namespace IELTSWebAdmin
         {
             id = (List<int>)Session["ID"];
             queText = (List<string>)Session["queText"];
-            
+
             lblMessage.Text = id.Count.ToString();
-            
+
 
             if (!Page.IsPostBack)
             {
                 Session["queIndex"] = 0;
                 dt = new DataTable();
                 dt1 = new DataTable();
+                dt2 = new DataTable();
                 answer = new String[5];
             }
         }
@@ -70,31 +72,32 @@ namespace IELTSWebAdmin
                 }
             }
 
-            for (int i = 0; i < id.Count ; i++)
+            for (int i = 0; i < id.Count; i++)
             {
                 try
-            {
-                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-                using (SqlConnection con = new SqlConnection(constr))
                 {
-                    using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerOptions = @AnswerOptions WHERE questionID = @queID"))
+                    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection con = new SqlConnection(constr))
                     {
-                        cmd.Connection = con;
-                        cmd.Parameters.AddWithValue("@AnswerOptions", insertString(answer));
-                        cmd.Parameters.AddWithValue("@queID",id[i]);
-                        con.Open();
-                        cmd.ExecuteNonQuery();
-                        con.Close();
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+                        using (SqlCommand cmd = new SqlCommand("UPDATE QUESTION SET answerOptions = @AnswerOptions WHERE questionID = @queID"))
+                        {
+                            cmd.Connection = con;
+                            cmd.Parameters.AddWithValue("@AnswerOptions", insertString(answer));
+                            cmd.Parameters.AddWithValue("@queID", id[i]);
+                            con.Open();
+                            cmd.ExecuteNonQuery();
+                            con.Close();
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Successfully')", true);
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
+                }
+
             }
 
-        }
             //retrieve answer options and dislay it into dynamic ddl
             String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection conn = new SqlConnection(strConn);
@@ -128,16 +131,24 @@ namespace IELTSWebAdmin
             conn.Close();
             dtrAnsOpt.Close();
 
+            sessionI = (int)Session["queIndex"];
+
+
+
             dt1.Columns.Add("Label");
             for (int i = 0; i < id.Count; i++)
             {
-                dt1.Rows.Add();
+                dt1.Rows.Add(queText[sessionI]);
             }
             this.Repeater2.DataSource = dt1;
             this.Repeater2.DataBind();
-           
 
-            btnProceed.Enabled = true;
+            sessionI++;
+            Session["queIndex"] = sessionI;
+
+
+            btnProceed.Enabled = false;
+            ddlNumberOfRows.Enabled = false;
         }
 
 
@@ -161,30 +172,29 @@ namespace IELTSWebAdmin
             if (e.Item.ItemType == ListItemType.Item ||
                 e.Item.ItemType == ListItemType.AlternatingItem)
             {
-                //Label lbl3 = (Label)e.Item.FindControl("lbl3");
                 DropDownList ddl2 = (DropDownList)e.Item.FindControl("ddl2");
-                
+               
                 foreach (string w in word)
-                { 
+                {
                     if (!w.Equals(""))
                     {
                         ddl2.Items.Add(w);
                     }
                 }
-                
             }
 
-            try
-            {
-                Label lbl3 = (Label)e.Item.FindControl("lbl3");
+        }
 
+        protected void Repeater3_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item ||
+                e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Label lbl3 = (Label)e.Item.FindControl("label3") as Label;
                 sessionI = (int)Session["queIndex"];
                 lbl3.Text = queText[sessionI];
                 sessionI++;
                 Session["queIndex"] = sessionI;
-            }
-            catch (Exception ex) { 
-
             }
         }
     }
