@@ -34,11 +34,11 @@ namespace IELTSWebAdmin
 
                 getFirebaseData();
 
-                ReportDataSource dsSalesOrder = new ReportDataSource();
-                dsSalesOrder.Name = "Staff";
-                dsSalesOrder.Value = myDS.Tables[0];
+                ReportDataSource dsStaff = new ReportDataSource();
+                dsStaff.Name = "Staff";
+                dsStaff.Value = myDS.Tables[0];
 
-                localReport.DataSources.Add(dsSalesOrder);
+                localReport.DataSources.Add(dsStaff);
             }
         }
 
@@ -58,7 +58,7 @@ namespace IELTSWebAdmin
                         var js = new JavaScriptSerializer();
                         var objText = reader.ReadToEnd();
                        myDataSet = JsonConvert.DeserializeObject<List<JSONModel.Staff>>(objText);
-                    myDataSet.RemoveAt(0);
+                       myDataSet.RemoveAt(0);
                        myDS = DatasetConvert.ToDataSet<JSONModel.Staff>(myDataSet);
                     }
                 }
