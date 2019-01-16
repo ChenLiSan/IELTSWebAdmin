@@ -1,4 +1,6 @@
-﻿using Firebase.Storage;
+﻿using Firebase.Database;
+using Firebase.Database.Query;
+using Firebase.Storage;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,8 +14,10 @@ namespace IELTSWebAdmin
 {
     public partial class FormSubsection : System.Web.UI.Page
     {
-        int totalQ ;
+        static int totalQ ;
         static String address = "";
+        static String url;
+        static String type;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -104,15 +108,15 @@ namespace IELTSWebAdmin
                 Session["TotalQ"] = int.Parse(ddlQ.SelectedValue); 
         }
 
-        protected void btnProceed_Click(object sender, EventArgs e)
+        protected async void btnProceed_Click(object sender, EventArgs e)
         {
             String strConn = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             SqlConnection conn = new SqlConnection(strConn);
             conn.Open();
             try
             {
-                String url = (String)Session["imageurl"];
-                String type = (String)Session["typeofsection"];
+                url = (String)Session["imageurl"];
+                type = (String)Session["typeofsection"];
 
                 SqlCommand cmd = new SqlCommand();
 
@@ -123,22 +127,23 @@ namespace IELTSWebAdmin
                 cmd.Parameters.Add(photoUrlParameter);
                 cmd.Parameters.Add(new SqlParameter("@t", totalQ));
                 cmd.Parameters.Add(new SqlParameter("@toq", type));
-                string id= (string)Session["sID"];
+                int id= (int)Session["sID"];
+                
                 cmd.Parameters.Add(new SqlParameter("@section", id));
                 cmd.Parameters.Add(new SqlParameter("@sectionText", txtSecText.Text));
 
-                int i = (int)cmd.ExecuteScalar();
-                conn.Close();
+               cmd.ExecuteNonQuery();
+               conn.Close();
+
+                write();
+
 
             }
             catch (Exception ex)
             {
                 Label4.Text = ex.Message.ToString();
             }
-            address = (string)Session["address"];
-            totalQ = (int)Session["TotalQ"];
-
-            Response.Redirect(address);
+           
         }
 
         protected async void btnUpload_ClickAsync(object sender, EventArgs e)
@@ -182,6 +187,49 @@ namespace IELTSWebAdmin
             
         }
 
+        public async void write() {
+            try
+            {
+                Subsection1 s1 = new Subsection1();
+                s1.imageurl = url;
+                s1.sectionText = txtSecText.Text;
+                s1.totalQuestion = totalQ;
+                s1.typeofQuestion = type;
+
+                String sec = (String)Session["sectionKeyFire"];
+                String sectioncat = (String)Session["sectionCatFire"];
+
+                var firebase = new FirebaseClient("https://ielts-9c8f1.firebaseio.com/");
+
+                // add new item to list of data and let the client generate new key for you (done offline)
+                var dino = await firebase
+                  .Child("section")
+                  .Child(sectioncat)
+                  .Child(sec)
+                  .Child("subsection")
+                  .PostAsync(s1);
+
+                if (dino.Key != null)
+                {
+                    Session["subsectionKeyFire"] = dino.Key;
+
+
+                    address = (string)Session["address"];
+                    totalQ = (int)Session["TotalQ"];
+                    Session["TotalQ"] = totalQ;
+
+                    Response.Redirect(address);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            
+
+            
+        }
 
     }
 }

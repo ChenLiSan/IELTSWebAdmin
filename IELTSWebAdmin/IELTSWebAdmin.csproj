@@ -2238,6 +2238,8 @@
     <Compile Include="question.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Question1.cs" />
+    <Compile Include="Section1.cs" />
     <Compile Include="questionBysubsection_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -2310,6 +2312,7 @@
     <Compile Include="subsection.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Subsection1.cs" />
     <Compile Include="subsectionBysection_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

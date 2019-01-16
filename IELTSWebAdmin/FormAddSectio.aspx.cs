@@ -11,12 +11,15 @@ using System.Configuration;
 using Firebase.Storage;
 using System.Threading.Tasks;
 using System.Data;
+using Firebase.Database;
+using Firebase.Database.Query;
 
 namespace IELTSWebAdmin
 {
     public partial class FormAddSectio : System.Web.UI.Page
     {
-
+        int sectionNum;
+        static String audiourl;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -67,6 +70,7 @@ namespace IELTSWebAdmin
 
                 String url = "";
                 url = await task;
+                audiourl = url;
 
                 if (url != "")
                 {
@@ -122,22 +126,57 @@ namespace IELTSWebAdmin
             }
         }
 
-        protected void btnProceed_Click(object sender, EventArgs e)
+        protected async void btnProceed_Click(object sender, EventArgs e)
         {
-            if (ddlSection.SelectedValue.Equals(""))
-            {
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please select section number')", true);
 
-            }
-            else
+            try
             {
-                Response.Redirect("FormSubsection.aspx");
+                sectionNum = int.Parse(ddlSection.SelectedValue);
+                String sectioncat = "section1";
+
+                if (sectionNum == 1) { sectioncat = "section1"; }
+                else if (sectionNum == 2) { sectioncat = "section2"; }
+                else if (sectionNum == 3) { sectioncat = "section3"; }
+                else if (sectionNum == 4) { sectioncat = "section4"; }
+
+                Section1 q = new Section1();
+                q.audio = audiourl;
+
+
+                var firebase = new FirebaseClient("https://ielts-9c8f1.firebaseio.com/");
+
+                // add new item to list of data and let the client generate new key for you (done offline)
+                var dino = await firebase
+                  .Child("section")
+                  .Child(sectioncat)
+                  .PostAsync(q);
+
+                if (dino.Key != null) {
+
+                    Session["sectionKeyFire"] = dino.Key;
+                    Session["sectionCatFire"] = sectioncat;
+
+                    if (ddlSection.SelectedValue.Equals(""))
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Please select section number')", true);
+
+                    }
+                    else
+                    {
+                        Response.Redirect("FormSubsection.aspx");
+                    }
+                }
             }
-        }
+            catch (Exception ex) {
+
+                string g = "";
+            }
+
+         }
 
         protected void ddlSection_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
