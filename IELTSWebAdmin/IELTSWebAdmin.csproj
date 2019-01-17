@@ -553,7 +553,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="TemplateAnalyticDiagram.aspx" />
-    <Content Include="TemplateAnalyticDiagram1.aspx" />
     <Content Include="TemplateMatchingAns.aspx" />
     <Content Include="TemplateMatchingAnsOpt.aspx" />
     <Content Include="TemplateMultipleChoice.aspx" />
@@ -2326,13 +2325,6 @@
     <Compile Include="TemplateAnalyticDiagram.aspx.designer.cs">
       <DependentUpon>TemplateAnalyticDiagram.aspx</DependentUpon>
     </Compile>
-    <Compile Include="TemplateAnalyticDiagram1.aspx.cs">
-      <DependentUpon>TemplateAnalyticDiagram1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="TemplateAnalyticDiagram1.aspx.designer.cs">
-      <DependentUpon>TemplateAnalyticDiagram1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="TemplateMatchingAns.aspx.cs">
       <DependentUpon>TemplateMatchingAns.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2542,7 +2534,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="Report2.rdlc" />
-    <EmbeddedResource Include="SampleReport.rdlc" />
+    <Content Include="SampleReport.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Firebase.Database;
+using Firebase.Database.Query;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -13,7 +15,7 @@ namespace IELTSWebAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void Button1_Click1(object sender, EventArgs e)
@@ -40,17 +42,66 @@ namespace IELTSWebAdmin
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
             }
 
-            int tq = (int)Session["TotalQ"];
+            write();
+        }
 
-            if (tq > 1)
+        public async void write()
+        {
+            String sec = (String)Session["sectionKeyFire"];
+            String sectioncat = (String)Session["sectionCatFire"];
+            String subsec = (String)Session["subsectionKeyFire"];
+
+
+            var firebase = new FirebaseClient("https://ielts-9c8f1.firebaseio.com/");
+
+            Question1 q1 = new Question1();
+            try
             {
-                Session["TotalQ"] = tq - 1;
-                Response.Redirect("TemplateSentenceCompletion.aspx");
+                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                using (SqlConnection conn = new SqlConnection(constr))
+                {
+
+                    SqlCommand myCommand = new SqlCommand("Select * from question", conn);
+                    //myCommand.Parameters.AddWithValue("@id", queID);
+                    conn.Open();
+                    SqlDataReader myReader = myCommand.ExecuteReader();
+
+                    while (myReader.Read())
+                    {
+                        q1.sequence = 1;
+                        q1.answerText = myReader["answerText"].ToString();
+                        q1.questionText = myReader["questionText"].ToString();
+                    }
+
+                    var dino = await firebase
+                    .Child("section")
+                    .Child(sectioncat)
+                    .Child(sec)
+                    .Child("subsection")
+                    .Child(subsec)
+                    .Child("question")
+                    .PostAsync(q1);
+
+                    int tq = (int)Session["TotalQ"];
+
+                    if (dino.Key != null && tq > 1)
+                    {
+                        Session["TotalQ"] = tq - 1;
+                        Response.Redirect("TemplateSentenceCompletion.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("FormSubsection.aspx");
+                    }
+
+                }
+
             }
-            else
+            catch (Exception e)
             {
-                Response.Redirect("FormSubsection.aspx");
+                Console.WriteLine(e.ToString());
             }
+
         }
     }
 }

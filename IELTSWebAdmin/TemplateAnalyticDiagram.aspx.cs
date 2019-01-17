@@ -279,13 +279,7 @@ namespace IELTSWebAdmin
                 {
                     Console.WriteLine(e.ToString());
                 }
-
-
-
             }
-            
-
-        }
-        
+        } 
     }
 }

@@ -26,6 +26,23 @@ namespace IELTSWebAdmin
             if (!Page.IsPostBack)
             {
                 // Set the processing mode for the ReportViewer to Local  
+                //ReportViewer1.ProcessingMode = ProcessingMode.Local;
+
+                //ReportViewer1.LocalReport.ReportPath = "SampleReport.rdlc";
+
+                //getFirebaseData();
+
+                //ReportDataSource dsStaff = new ReportDataSource("Staff", myDS.Tables[0]);
+
+                //dsStaff.Name = "Staff";
+                //dsStaff.Value = myDS.Tables[0];
+
+                //ReportViewer1.LocalReport.DataSources.Clear();
+                //ReportViewer1.LocalReport.DataSources.Add(dsStaff);
+                //ReportViewer1.LocalReport.Refresh();
+
+                //localReport.DataSources.Add(dsStaff);
+
                 ReportViewer1.ProcessingMode = ProcessingMode.Local;
 
                 LocalReport localReport = ReportViewer1.LocalReport;
@@ -40,6 +57,7 @@ namespace IELTSWebAdmin
 
                 localReport.DataSources.Add(dsStaff);
             }
+
         }
 
         public void getFirebaseData() {
@@ -67,15 +85,18 @@ namespace IELTSWebAdmin
 
             }
 
+            foreach (DataTable table in myDS.Tables)
+            {
+                foreach (DataRow dr in table.Rows)
+                {
+                    string name = dr["name"].ToString();
+                    string gmail = dr["gmail"].ToString();
+                    Label1.Text = name + gmail;
+                }
+            }
 
-}
-
-
-
+        }
         
-
-
-
     }
 
     public static class DatasetConvert

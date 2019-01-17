@@ -8,6 +8,8 @@ using System.Drawing;
 using System.Data;
 using System.Configuration;
 using System.Data.SqlClient;
+using Firebase.Database;
+using Firebase.Database.Query;
 
 namespace IELTSWebAdmin
 {
@@ -16,7 +18,8 @@ namespace IELTSWebAdmin
 
         static DataTable dt;
         static String[] answer;
-        
+        static int queID;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -107,7 +110,7 @@ namespace IELTSWebAdmin
 
             String strSelect = "Select answerOptions from Question WHERE questionID = @queID";
 
-            int queID = (int)Session["qID"];
+            queID = (int)Session["qID"];
             SqlCommand cmdSelect = new SqlCommand(strSelect, conn);
             cmdSelect.Parameters.AddWithValue("@queID", queID);
             dtrAnsOpt = cmdSelect.ExecuteReader();
@@ -171,7 +174,7 @@ namespace IELTSWebAdmin
             {
                 cmd.Connection = con;
                 cmd.Parameters.AddWithValue("@AnswerText", ddlCorrectAns.SelectedValue);
-                int queID = (int)Session["qID"];
+                queID = (int)Session["qID"];
                 cmd.Parameters.AddWithValue("@queID", queID);
                 con.Open();
                 cmd.ExecuteNonQuery();
@@ -185,20 +188,75 @@ namespace IELTSWebAdmin
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
             }
 
-            int tq = (int)Session["TotalQ"];
+            write();
 
-            if (tq > 1)
-            {
-                Session["TotalQ"] = tq - 1;
-                Response.Redirect("TemplateMultipleChoice.aspx");
-            }
-            else
-            {
-                Response.Redirect("FormSubsection.aspx");
-            }
+
         }
 
-        protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
+        public async void write()
+        {
+            String sec = (String)Session["sectionKeyFire"];
+            String sectioncat = (String)Session["sectionCatFire"];
+            String subsec = (String)Session["subsectionKeyFire"];
+
+
+            var firebase = new FirebaseClient("https://ielts-9c8f1.firebaseio.com/");
+
+            Question1 q1 = new Question1();
+            try
+            {
+                string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                using (SqlConnection conn = new SqlConnection(constr))
+                {
+
+                    SqlCommand myCommand = new SqlCommand("Select * from question where questionID = @id;", conn);
+                    myCommand.Parameters.AddWithValue("@id", queID);
+                    conn.Open();
+                    SqlDataReader myReader = myCommand.ExecuteReader();
+
+                    while (myReader.Read())
+                    {
+                        q1.answerOptions = myReader["answerOptions"].ToString();
+                        q1.sequence = 1;
+                        q1.answerText = myReader["answerText"].ToString();
+                        q1.questionText = myReader["questionText"].ToString();
+                    }
+
+                    var dino = await firebase
+                    .Child("section")
+                    .Child(sectioncat)
+                    .Child(sec)
+                    .Child("subsection")
+                    .Child(subsec)
+                    .Child("question")
+                    .PostAsync(q1);
+
+                    int tq = (int)Session["TotalQ"];
+
+                    if (dino.Key != null && tq > 1)
+                    {
+                        Session["TotalQ"] = tq - 1;
+                        Response.Redirect("TemplateMultipleChoice.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("FormSubsection.aspx");
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+
+
+        }
+
+
+            protected void Repeater1_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
 
         }

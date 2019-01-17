@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Firebase.Database;
+using Firebase.Database.Query;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -252,7 +254,65 @@ namespace IELTSWebAdmin
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Insert Unsuccessful')", true);
                 }
             }
-            Response.Redirect("FormSubsection.aspx");
+            write();
+        }
+
+        public async void write()
+        {
+            String sec = (String)Session["sectionKeyFire"];
+            String sectioncat = (String)Session["sectionCatFire"];
+            String subsec = (String)Session["subsectionKeyFire"];
+
+            var firebase = new FirebaseClient("https://ielts-9c8f1.firebaseio.com/");
+
+            for (int i = 0; i < id.Count; i++)
+            {
+                Question1 q1 = new Question1();
+                try
+                {
+                    string constr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+                    using (SqlConnection conn = new SqlConnection(constr))
+                    {
+
+                        SqlCommand myCommand = new SqlCommand("Select * from question where questionID = @id;", conn);
+                        myCommand.Parameters.AddWithValue("@id", id[i]);
+                        conn.Open();
+                        SqlDataReader myReader = myCommand.ExecuteReader();
+
+                        while (myReader.Read())
+                        {
+                            q1.answerOptions = myReader["answerOptions"].ToString();
+                            q1.sequence = i + 1;
+                            q1.answerText = myReader["answerText"].ToString();
+                            q1.questionText = myReader["questionText"].ToString();
+                        }
+
+                        var dino = await firebase
+                        .Child("section")
+                        .Child(sectioncat)
+                        .Child(sec)
+                        .Child("subsection")
+                        .Child(subsec)
+                        .Child("question")
+                        .PostAsync(q1);
+
+                        if (dino.Key != null && i == id.Count - 1)
+                        {
+                            Response.Redirect("FormSubsection.aspx");
+                        }
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
+
+
+
+            }
+
+
         }
     }
     }
