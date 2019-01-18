@@ -156,6 +156,7 @@ namespace IELTSWebAdmin
 
             btnProceed.Enabled = false;
             ddlNumberOfRows.Enabled = false;
+            btnProceed2.Enabled = true;
         }
 
 

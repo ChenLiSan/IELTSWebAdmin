@@ -147,6 +147,9 @@ namespace IELTSWebAdmin
             this.Repeater2.DataBind();
 
             btnProceed.Enabled = true;
+
+            ddlNumberOfRows.Enabled = false;
+            btnSave.Enabled = false;
         }
 
 

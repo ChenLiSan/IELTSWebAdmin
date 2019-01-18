@@ -139,6 +139,11 @@ namespace IELTSWebAdmin
             conn.Close();
             dtrAnsOpt.Close();
 
+            txtQ.Enabled = false;
+            Button1.Enabled = false;
+            ddlNumberOfRows.Enabled = false;
+            btnSave1.Enabled = true;
+            ddlCorrectAns.Enabled = true;
         }
 
         private String insertString(String[] answer)

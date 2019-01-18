@@ -279,11 +279,9 @@ namespace IELTSWebAdmin {
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class DataTable1DataTable : global::System.Data.TypedTableBase<DataTable1Row> {
             
-            private global::System.Data.DataColumn columngrade;
+            private global::System.Data.DataColumn columnscore;
             
-            private global::System.Data.DataColumn columnname;
-            
-            private global::System.Data.DataColumn columndate;
+            private global::System.Data.DataColumn columnColumn1;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
@@ -320,25 +318,17 @@ namespace IELTSWebAdmin {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn gradeColumn {
+            public global::System.Data.DataColumn scoreColumn {
                 get {
-                    return this.columngrade;
+                    return this.columnscore;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn nameColumn {
+            public global::System.Data.DataColumn Column1Column {
                 get {
-                    return this.columnname;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public global::System.Data.DataColumn dateColumn {
-                get {
-                    return this.columndate;
+                    return this.columnColumn1;
                 }
             }
             
@@ -379,12 +369,11 @@ namespace IELTSWebAdmin {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DataTable1Row AddDataTable1Row(string grade, string name, System.DateTime date) {
+            public DataTable1Row AddDataTable1Row(decimal score, int Column1) {
                 DataTable1Row rowDataTable1Row = ((DataTable1Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        grade,
-                        name,
-                        date};
+                        score,
+                        Column1};
                 rowDataTable1Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDataTable1Row);
                 return rowDataTable1Row;
@@ -407,22 +396,18 @@ namespace IELTSWebAdmin {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             internal void InitVars() {
-                this.columngrade = base.Columns["grade"];
-                this.columnname = base.Columns["name"];
-                this.columndate = base.Columns["date"];
+                this.columnscore = base.Columns["score"];
+                this.columnColumn1 = base.Columns["Column1"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             private void InitClass() {
-                this.columngrade = new global::System.Data.DataColumn("grade", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columngrade);
-                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnname);
-                this.columndate = new global::System.Data.DataColumn("date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columndate);
-                this.columngrade.MaxLength = 50;
-                this.columnname.MaxLength = 200;
+                this.columnscore = new global::System.Data.DataColumn("score", typeof(decimal), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnscore);
+                this.columnColumn1 = new global::System.Data.DataColumn("Column1", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnColumn1);
+                this.columnColumn1.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -565,86 +550,58 @@ namespace IELTSWebAdmin {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string grade {
+            public decimal score {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.gradeColumn]));
+                        return ((decimal)(this[this.tableDataTable1.scoreColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'grade\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'score\' in table \'DataTable1\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.gradeColumn] = value;
+                    this[this.tableDataTable1.scoreColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public string name {
+            public int Column1 {
                 get {
                     try {
-                        return ((string)(this[this.tableDataTable1.nameColumn]));
+                        return ((int)(this[this.tableDataTable1.Column1Column]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'name\' in table \'DataTable1\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Column1\' in table \'DataTable1\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDataTable1.nameColumn] = value;
+                    this[this.tableDataTable1.Column1Column] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public System.DateTime date {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tableDataTable1.dateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'date\' in table \'DataTable1\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableDataTable1.dateColumn] = value;
-                }
+            public bool IsscoreNull() {
+                return this.IsNull(this.tableDataTable1.scoreColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsgradeNull() {
-                return this.IsNull(this.tableDataTable1.gradeColumn);
+            public void SetscoreNull() {
+                this[this.tableDataTable1.scoreColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetgradeNull() {
-                this[this.tableDataTable1.gradeColumn] = global::System.Convert.DBNull;
+            public bool IsColumn1Null() {
+                return this.IsNull(this.tableDataTable1.Column1Column);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsnameNull() {
-                return this.IsNull(this.tableDataTable1.nameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetnameNull() {
-                this[this.tableDataTable1.nameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsdateNull() {
-                return this.IsNull(this.tableDataTable1.dateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetdateNull() {
-                this[this.tableDataTable1.dateColumn] = global::System.Convert.DBNull;
+            public void SetColumn1Null() {
+                this[this.tableDataTable1.Column1Column] = global::System.Convert.DBNull;
             }
         }
         
@@ -807,9 +764,8 @@ namespace IELTSWebAdmin.DataSet2TableAdapters {
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "DataTable1";
-            tableMapping.ColumnMappings.Add("grade", "grade");
-            tableMapping.ColumnMappings.Add("name", "name");
-            tableMapping.ColumnMappings.Add("date", "date");
+            tableMapping.ColumnMappings.Add("score", "score");
+            tableMapping.ColumnMappings.Add("Column1", "Column1");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -826,10 +782,34 @@ namespace IELTSWebAdmin.DataSet2TableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        attempt.grade, candidate.name, session.date
-FROM            attempt INNER JOIN
-                         candidate ON attempt.candidate = candidate.candidateID INNER JOIN
-                         session ON attempt.sessionID = session.sessionID";
+            this._commandCollection[0].CommandText = "(SELECT COUNT(candidate.candidateID), attempt.score FROM candidate\r\n\tINNER JOIN a" +
+                "ttempt ON attempt.attemptID = candidate.candidateID\r\n\tWHERE attempt.score = 4.0 " +
+                "\r\n\tGROUP BY attempt.score)\r\n\r\n\tUNION\r\n\r\n\t(SELECT COUNT(candidate.candidateID), a" +
+                "ttempt.score FROM candidate\r\n\tINNER JOIN attempt ON attempt.attemptID = candidat" +
+                "e.candidateID\r\n\tWHERE attempt.score = 4.5\r\n\tGROUP BY attempt.score)\r\n\r\n\tUNION\r\n\r" +
+                "\n\t(SELECT COUNT(candidate.candidateID), attempt.score FROM candidate\r\n\tINNER JOI" +
+                "N attempt ON attempt.attemptID = candidate.candidateID\r\n\tWHERE attempt.score = 5" +
+                ".0\r\n\tGROUP BY attempt.score)\r\n\r\n\tUNION\r\n\r\n\t(SELECT COUNT(candidate.candidateID)," +
+                " attempt.score FROM candidate\r\n\tINNER JOIN attempt ON attempt.attemptID = candid" +
+                "ate.candidateID\r\n\tWHERE attempt.score = 5.5\r\n\tGROUP BY attempt.score)\r\n\r\n\tUNION\r" +
+                "\n\r\n\t(SELECT COUNT(candidate.candidateID), attempt.score FROM candidate\r\n\tINNER J" +
+                "OIN attempt ON attempt.attemptID = candidate.candidateID\r\n\tWHERE attempt.score =" +
+                "6.0\r\n\tGROUP BY attempt.score)\r\n\r\n\tUNION\r\n\r\n\t(SELECT COUNT(candidate.candidateID)" +
+                ", attempt.score FROM candidate\r\n\tINNER JOIN attempt ON attempt.attemptID = candi" +
+                "date.candidateID\r\n\tWHERE attempt.score = 6.5\r\n\tGROUP BY attempt.score)\r\n\r\n\tUNION" +
+                "\r\n\r\n\t(SELECT COUNT(candidate.candidateID), attempt.score FROM candidate\r\n\tINNER " +
+                "JOIN attempt ON attempt.attemptID = candidate.candidateID\r\n\tWHERE attempt.score " +
+                "= 7.0\r\n\tGROUP BY attempt.score)\r\n\r\n\tUNION\r\n\r\n\t(SELECT COUNT(candidate.candidateI" +
+                "D), attempt.score FROM candidate\r\n\tINNER JOIN attempt ON attempt.attemptID = can" +
+                "didate.candidateID\r\n\tWHERE attempt.score = 7.5\r\n\tGROUP BY attempt.score)\r\n\r\n\tUNI" +
+                "ON\r\n\r\n\t(SELECT COUNT(candidate.candidateID), attempt.score FROM candidate\r\n\tINNE" +
+                "R JOIN attempt ON attempt.attemptID = candidate.candidateID\r\n\tWHERE attempt.scor" +
+                "e = 8.0\r\n\tGROUP BY attempt.score)\r\n\r\n\tUNION\r\n\r\n\t(SELECT COUNT(candidate.candidat" +
+                "eID), attempt.score FROM candidate\r\n\tINNER JOIN attempt ON attempt.attemptID = c" +
+                "andidate.candidateID\r\n\tWHERE attempt.score = 8.5\r\n\tGROUP BY attempt.score)\r\n\r\n\tU" +
+                "NION\r\n\r\n\t(SELECT COUNT(candidate.candidateID), attempt.score FROM candidate\r\n\tIN" +
+                "NER JOIN attempt ON attempt.attemptID = candidate.candidateID\r\n\tWHERE attempt.sc" +
+                "ore = 9.0\r\n\tGROUP BY attempt.score)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
