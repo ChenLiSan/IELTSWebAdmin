@@ -33,6 +33,7 @@
             </td>
             <td class="auto-style1">
                 <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True" Width="177px">
+                    <asp:ListItem>----select template----</asp:ListItem>
                     <asp:ListItem>Multiple Choice</asp:ListItem>
                     <asp:ListItem>Matching</asp:ListItem>
                     <asp:ListItem>Form, Note, Table</asp:ListItem>
